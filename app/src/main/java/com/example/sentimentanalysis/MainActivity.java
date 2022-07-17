@@ -1,5 +1,6 @@
 package com.example.sentimentanalysis;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -17,6 +18,7 @@ import com.example.sentimentanalysis.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Button Test = this.findViewById(R.id.button);
+        Test.setOnClickListener(this::onBtnClicked);
     }
 
     @Override
@@ -68,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void onBtnClicked(View view){
+        Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
     }
 }
