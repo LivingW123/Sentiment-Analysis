@@ -14,6 +14,12 @@
         android:theme="@style/Theme.SentimentAnalysis"
         tools:targetApi="31">
         <activity
+            android:name=".ExcerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChatActivity"
             android:exported="false" />
         <activity

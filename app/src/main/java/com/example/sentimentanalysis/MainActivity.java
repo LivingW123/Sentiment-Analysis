@@ -41,8 +41,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        Button Test = this.findViewById(R.id.button);
-        Test.setOnClickListener(this::onBtnClicked);
+        Button ToChat = this.findViewById(R.id.ButtonChat);
+        ToChat.setOnClickListener(this::onChatClicked);
+
+        Button ToProfile = this.findViewById(R.id.ButtonProfile);
+        ToProfile.setOnClickListener(this::onProfileClicked);
+
+        Button ToExcercise = this.findViewById(R.id.ButtonExcercise);
+        ToExcercise.setOnClickListener(this::onExcerciseClicked);
     }
 
     @Override
@@ -74,8 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    private void onBtnClicked(View view){
+    private void onChatClicked(View view){
         Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
+    }
+
+    private void onProfileClicked(View view){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void onExcerciseClicked(View view){
+        Intent intent = new Intent(this, ExcerciseActivity.class);
         startActivity(intent);
     }
 }
