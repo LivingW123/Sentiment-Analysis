@@ -47,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
         Button ToProfile = this.findViewById(R.id.ButtonProfile);
         ToProfile.setOnClickListener(this::onProfileClicked);
 
-        Button ToExcercise = this.findViewById(R.id.ButtonExcercise);
-        ToExcercise.setOnClickListener(this::onExcerciseClicked);
+        Button ToExercise = this.findViewById(R.id.ButtonExercise);
+        ToExercise.setOnClickListener(this::onExerciseClicked);
+
+        Button ToMusic = this.findViewById(R.id.ButtonMusic);
+        ToMusic.setOnClickListener(this::onMusicClicked);
     }
 
     @Override
@@ -90,8 +93,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void onExcerciseClicked(View view){
-        Intent intent = new Intent(this, ExcerciseActivity.class);
+    private void onExerciseClicked(View view){
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }
+
+    private void onMusicClicked(View view){
+        Intent intent = new Intent(this, MusicActivity.class);
         startActivity(intent);
     }
 }
