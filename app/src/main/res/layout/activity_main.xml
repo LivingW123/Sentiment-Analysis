@@ -52,9 +52,10 @@
 
         <TextView
             android:id="@+id/MainPageTitle"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center"
             android:text="My Home Page"
             android:textSize="22sp" />
 
@@ -83,8 +84,10 @@
                 <TextView
                     android:id="@+id/ChatHeader"
                     style="@style/ChatButton"
-                    android:layout_height="38dp"
-                    android:text="TextView" />
+                    android:layout_height="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Messaging"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/ChatDescription"
@@ -94,29 +97,31 @@
                     android:text="Sample Text #1" />
             </LinearLayout>
             <Button
-                android:id="@+id/ButtonChat"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"   />
+            android:id="@+id/ButtonChat"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"   />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ExerciseSelection"
             android:layout_width="match_parent"
-            android:layout_height="147dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ExerciseIcon"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:id="@+id/ExerciseSelectionText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -124,33 +129,44 @@
                 <TextView
                     android:id="@+id/ExerciseHeader"
                     style="@style/ChatButton"
-                    android:text="TextView" />
+                    android:layout_height="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Exercise Plan"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/ExerciseDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Sample Text #2" />
+                    android:text="Sample Text #1" />
             </LinearLayout>
+            <Button
+                android:id="@+id/ButtonExercise"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"   />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/MusicSelection"
             android:layout_width="match_parent"
-            android:layout_height="147dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/MusicIcon"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:id="@+id/MusicSelectionText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -158,33 +174,44 @@
                 <TextView
                     android:id="@+id/MusicHeader"
                     style="@style/ChatButton"
-                    android:text="TextView" />
+                    android:layout_height="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Music"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/MusicDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Sample Text #3" />
+                    android:text="Sample Text #1" />
             </LinearLayout>
+            <Button
+                android:id="@+id/ButtonMusic"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"   />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/DietSelection"
             android:layout_width="match_parent"
-            android:layout_height="147dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/DietIcon"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:id="@+id/DietSelectionText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -192,38 +219,25 @@
                 <TextView
                     android:id="@+id/DietHeader"
                     style="@style/ChatButton"
-                    android:text="TextView" />
+                    android:layout_height="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Diet Plan"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/DietDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Sample Text #4" />
+                    android:text="Sample Text #1" />
             </LinearLayout>
+            <Button
+                android:id="@+id/ButtonDiet"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"   />
         </LinearLayout>
-
-
-
-
-        <Button
-            android:id="@+id/ButtonProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/ButtonExercise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/ButtonMusic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

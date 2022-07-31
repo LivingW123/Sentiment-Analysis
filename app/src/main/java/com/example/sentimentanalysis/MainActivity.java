@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         Button ToChat = this.findViewById(R.id.ButtonChat);
         ToChat.setOnClickListener(this::onChatClicked);
 
-        Button ToProfile = this.findViewById(R.id.ButtonProfile);
-        ToProfile.setOnClickListener(this::onProfileClicked);
+        Button ToDiet = this.findViewById(R.id.ButtonDiet);
+        ToDiet.setOnClickListener(this::onDietClicked);
 
         Button ToExercise = this.findViewById(R.id.ButtonExercise);
         ToExercise.setOnClickListener(this::onExerciseClicked);
@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void onProfileClicked(View view){
-        Intent intent = new Intent(this, ProfileActivity.class);
+    private void onDietClicked(View view){
+        Intent intent = new Intent(this, DietActivity.class);
         startActivity(intent);
     }
 

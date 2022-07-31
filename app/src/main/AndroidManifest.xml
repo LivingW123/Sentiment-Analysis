@@ -14,13 +14,16 @@
         android:theme="@style/Theme.SentimentAnalysis"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".MusicActivity"
             android:exported="false" />
         <activity
             android:name=".ExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".DietActivity"
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
