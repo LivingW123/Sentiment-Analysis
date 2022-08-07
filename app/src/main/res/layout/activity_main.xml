@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -33,8 +33,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="73dp"
+        android:background="@drawable/lightpurple"
         android:orientation="vertical"
+        android:paddingVertical="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
             android:id="@+id/MainPageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-light"
+            android:fontFamily="@font/gothic_a1_semibold"
             android:gravity="center"
             android:text="My Home Page"
             android:textSize="22sp" />
@@ -53,7 +54,8 @@
             android:id="@+id/ChatSelection"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/ChatIcon"
@@ -62,7 +64,7 @@
                 android:layout_weight="1"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/messageicon" />
 
             <LinearLayout
                 android:id="@+id/ChatSelectionText"
@@ -74,8 +76,8 @@
                 <TextView
                     android:id="@+id/ChatHeader"
                     style="@style/ChatButton"
-                    android:layout_height="40dp"
-                    android:fontFamily="sans-serif-condensed"
+                    android:layout_height="52dp"
+                    android:fontFamily="sans-serif"
                     android:text="Messaging"
                     android:textSize="20sp" />
 
@@ -86,19 +88,21 @@
                     android:layout_weight="1"
                     android:text="Sample Text #1" />
             </LinearLayout>
+
             <Button
-            android:id="@+id/ButtonChat"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"   />
+                android:id="@+id/ButtonChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Button" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ExerciseSelection"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/ExerciseIcon"
@@ -107,7 +111,7 @@
                 android:layout_weight="1"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/fitness" />
 
             <LinearLayout
                 android:id="@+id/ExerciseSelectionText"
@@ -119,9 +123,9 @@
                 <TextView
                     android:id="@+id/ExerciseHeader"
                     style="@style/ChatButton"
-                    android:layout_height="40dp"
+                    android:layout_height="54dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Exercise Plan"
+                    android:text="Work Out"
                     android:textSize="20sp" />
 
                 <TextView
@@ -131,19 +135,21 @@
                     android:layout_weight="1"
                     android:text="Sample Text #1" />
             </LinearLayout>
+
             <Button
                 android:id="@+id/ButtonExercise"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"   />
+                android:layout_gravity="center_vertical"
+                android:text="Button" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/MusicSelection"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/MusicIcon"
@@ -152,7 +158,7 @@
                 android:layout_weight="1"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/music" />
 
             <LinearLayout
                 android:id="@+id/MusicSelectionText"
@@ -164,7 +170,7 @@
                 <TextView
                     android:id="@+id/MusicHeader"
                     style="@style/ChatButton"
-                    android:layout_height="40dp"
+                    android:layout_height="51dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Music"
                     android:textSize="20sp" />
@@ -176,19 +182,21 @@
                     android:layout_weight="1"
                     android:text="Sample Text #1" />
             </LinearLayout>
+
             <Button
                 android:id="@+id/ButtonMusic"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"   />
+                android:layout_gravity="center_vertical"
+                android:text="Button" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/DietSelection"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/DietIcon"
@@ -197,7 +205,7 @@
                 android:layout_weight="1"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="15dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/food" />
 
             <LinearLayout
                 android:id="@+id/DietSelectionText"
@@ -209,7 +217,7 @@
                 <TextView
                     android:id="@+id/DietHeader"
                     style="@style/ChatButton"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Diet Plan"
                     android:textSize="20sp" />
@@ -221,12 +229,13 @@
                     android:layout_weight="1"
                     android:text="Sample Text #1" />
             </LinearLayout>
+
             <Button
                 android:id="@+id/ButtonDiet"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"   />
+                android:layout_gravity="center_vertical"
+                android:text="Button" />
         </LinearLayout>
     </LinearLayout>
 
