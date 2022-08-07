@@ -15,16 +15,20 @@
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         android:orientation="vertical"
+        android:paddingVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/DietTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:gravity="center_horizontal"
+            android:paddingVertical="20dp"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="My Diet" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,11 +36,34 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/rec_calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:text="Recommended Calories:" />
+
+            <TextView
+                android:id="@+id/red_value"
+                android:textSize="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:text="2000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/DailyIntake"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:gravity="center"
+                android:text="My Daily Calories" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName2"
@@ -44,14 +71,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="number"
                 android:text="Calorie Intake" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
