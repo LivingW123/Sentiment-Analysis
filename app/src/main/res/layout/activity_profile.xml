@@ -60,8 +60,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName"/>
         </LinearLayout>
 
         <LinearLayout
@@ -89,8 +88,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Age" />
+                android:inputType="textPersonName"/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,8 +116,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Phone Number" />
+                android:inputType="textPersonName"/>
         </LinearLayout>
 
         <Button
@@ -128,6 +125,6 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Sign In" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
