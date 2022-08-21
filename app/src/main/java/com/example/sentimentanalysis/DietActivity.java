@@ -26,6 +26,11 @@ public class DietActivity extends AppCompatActivity {
         pieDataSet = new PieDataSet(pieEntries, "");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
+
+        //https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/charts/PieChart.java
+        pieChart.setHoleRadius(0);
+        pieChart.setTransparentCircleAlpha(0);
+
         pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         pieDataSet.setValueTextSize(20f);
         //pieDataSet.setSelectionShift(30f);
