@@ -34,34 +34,90 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="genre of music" />
+                    android:fontFamily="@font/alfa_slab"
+                    android:textSize="25dp"
+                    android:gravity="center_horizontal"
+                    android:text="Genre of Music" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:checkedIcon="@drawable/checkmark">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip9"
+                        android:id="@+id/hiphopchip"
+                        android:checkable="true"
+                        android:text="Hiphop and Rap"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip10"
+                        android:id="@+id/popchip"
+                        android:checkable="true"
+                        android:text="Pop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip11"
+                        android:id="@+id/rockchip"
+                        android:checkable="true"
+                        android:text="Rock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip12"
+                        android:id="@+id/electronichip"
+                        android:checkable="true"
+                        android:text="Dance and Electronic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip13"
+                        android:id="@+id/latinchip"
+                        android:checkable="true"
+                        android:text="Latin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/altrockchip"
+                        android:checkable="true"
+                        android:text="Indie and Alternative Rock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/classicalchip"
+                        android:checkable="true"
+                        android:text="Classical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/kpopchip"
+                        android:checkable="true"
+                        android:text="K-Pop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/countrychip"
+                        android:checkable="true"
+                        android:text="Country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/metalchip"
+                        android:checkable="true"
+                        android:text="Metal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rbchip"
+                        android:checkable="true"
+                        android:text="Rhythm and Blues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.chip.ChipGroup>
@@ -70,19 +126,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="245dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="recommanded music" />
+                    android:fontFamily="@font/alfa_slab"
+                    android:gravity="center_horizontal"
+                    android:text="Recommanded Music"
+                    android:textSize="15dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,13 +153,105 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="artist" />
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:text="Fatured Artist" />
 
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:text="Top Hits/ Playlist" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/artist1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="artist" />
+
+                    <TextView
+                        android:id="@+id/topHits1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="top hits/ playlist" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/artist2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="artist" />
+
+                    <TextView
+                        android:id="@+id/topHits2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="top hits/ playlist" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/artist3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="artist" />
+
+                    <TextView
+                        android:id="@+id/topHits3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="top hits/ playlist" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/artist4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="artist" />
+
+                    <TextView
+                        android:id="@+id/topHits4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
                         android:text="top hits/ playlist" />
                 </LinearLayout>
             </LinearLayout>
@@ -114,20 +265,23 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="159dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/spotifylogo" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="spotify icon^ and then desc" />
+                android:text="brief spotfy description" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/recmusicdesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:textSize="20dp"
+                android:fontFamily="@font/comic_neue"
+                android:text="To view your recommended music playlist, please log on to Spotify." />
 
             <Button
                 android:id="@+id/button"

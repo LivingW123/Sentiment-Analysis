@@ -88,7 +88,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"/>
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout
@@ -116,7 +116,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"/>
+                android:inputType="number"/>
         </LinearLayout>
 
         <Button
