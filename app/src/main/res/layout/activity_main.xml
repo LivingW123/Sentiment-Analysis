@@ -67,7 +67,7 @@
 
             <LinearLayout
                 android:id="@+id/ChatSelectionText"
-                android:layout_width="wrap_content"
+                android:layout_width="101dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -77,17 +77,17 @@
                     style="@style/ChatButton"
                     android:layout_height="50dp"
                     android:fontFamily="sans-serif"
-                    android:gravity="left"
+                    android:gravity="center"
                     android:text="Messaging"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/ChatDescription"
-                    android:layout_width="98dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:gravity="left"
                     android:text="Get a hlpful AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
             </LinearLayout>
 
@@ -104,22 +104,31 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/ExerciseIcon"
+            <LinearLayout
+                android:id="@+id/badLinearLayout"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                app:srcCompat="@drawable/fitness" />
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ExerciseIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    app:srcCompat="@drawable/fitness" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ExerciseSelectionText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
@@ -127,23 +136,33 @@
                     style="@style/ChatButton"
                     android:layout_height="50dp"
                     android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
                     android:text="Work Out"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/ExerciseDescription"
-                    android:layout_width="98dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center|left"
                     android:text="Feeling stuck? Maybe a quick stretch or an intense workout can turn your day around." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/ButtonExercise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Button" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ButtonExercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
