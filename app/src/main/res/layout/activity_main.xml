@@ -54,22 +54,30 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/ChatIcon"
+            <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                app:srcCompat="@drawable/messageicon" />
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ChatIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    app:srcCompat="@drawable/messageicon" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ChatSelectionText"
-                android:layout_width="101dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,18 +93,25 @@
                     android:id="@+id/ChatDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_weight="1"
-                    android:gravity="left"
+                    android:gravity="center|left"
                     android:text="Get a hlpful AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/ButtonChat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Button" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ButtonChat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -170,46 +185,63 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/MusicIcon"
+            <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                app:srcCompat="@drawable/music" />
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/MusicIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    app:srcCompat="@drawable/music" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/MusicSelectionText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/MusicHeader"
                     style="@style/ChatButton"
-                    android:layout_height="51dp"
+                    android:layout_height="50dp"
                     android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
                     android:text="Music"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/MusicDescription"
-                    android:layout_width="98dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center|left"
                     android:text="Rocking to the 80s or whistling to the newest tune? Here are our recommendations based on your preferences." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/ButtonMusic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Button" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ButtonMusic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -217,22 +249,30 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/DietIcon"
+            <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="15dp"
-                app:srcCompat="@drawable/food" />
+                android:layout_weight="0.25"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/DietIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    app:srcCompat="@drawable/food" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/DietSelectionText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
 
                 <TextView
@@ -240,23 +280,33 @@
                     style="@style/ChatButton"
                     android:layout_height="50dp"
                     android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
                     android:text="Diet Plan"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/DietDescription"
-                    android:layout_width="98dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center|left"
                     android:text="Ireegular eating schedule, unhealthy eating, or simply hungry? Grab a recipe and eat in comfort." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/ButtonDiet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Button" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ButtonDiet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Button" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

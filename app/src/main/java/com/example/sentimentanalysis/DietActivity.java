@@ -1,7 +1,11 @@
 package com.example.sentimentanalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
+
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -34,6 +38,13 @@ public class DietActivity extends AppCompatActivity {
         pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         pieDataSet.setValueTextSize(20f);
         //pieDataSet.setSelectionShift(30f);
+
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(ProfileActivity.EXTRA_MESSAGE);
+        TextView textView = findViewById(R.id.agetext);
+        textView.setText(message);
+
+
     }
     private void getEntries() {
         pieEntries = new ArrayList<>();
