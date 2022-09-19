@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     GoogleSignInClient gsc;
     Button googleBtn;
     Button signOutBtn;
+    Button profileSaveBtn;
     TextView textview;
     EditText ageinput;
 
@@ -36,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         googleBtn = this.findViewById(R.id.google_button);
         signOutBtn   = findViewById(R.id.signOutBtn);
+        profileSaveBtn = this.findViewById(R.id.profilesave);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
@@ -53,6 +55,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signOut();
+            }
+        });
+        profileSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessage();
             }
         });
     }
@@ -101,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
         googleBtn.setEnabled(false);
     }
 
-    public void sendMessage (View view) {
+    public void sendMessage () {
         Intent intent = new Intent(this,DietActivity.class);
         EditText ageinput = (EditText) findViewById(R.id.editTextTextPersonAge);
         String message = ageinput.getText().toString();
