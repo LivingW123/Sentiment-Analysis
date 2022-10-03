@@ -102,12 +102,14 @@ public class ProfileActivity extends AppCompatActivity {
         String UserDname = act.getDisplayName();
         String UserEmail = act.getEmail();
         String UserGname = act.getGivenName();
+        String profilePic = act.getPhotoUrl().toString();
+        System.out.println("url is:" + profilePic);
         System.out.println(UserDname);
         System.out.println(UserEmail);
         System.out.println(UserGname);
         Toast.makeText(getApplicationContext(), UserDname, Toast.LENGTH_LONG).show();
         ImageView profimage = findViewById(R.id.profile_image);
-        Picasso.get().load("https://i.pinimg.com/736x/78/fe/99/78fe99b1ea00a5b81729ad7d8933ada2.jpg").into(profimage);
+        Picasso.get().load(profilePic).into(profimage);
         googleBtn.setText("Logged in as " + UserDname);
         googleBtn.setAlpha(.5f);
         googleBtn.setEnabled(false);
