@@ -73,13 +73,14 @@
                 android:text="My Daily Calories" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/real_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Calorie Amount"
                 android:inputType="number"
-                android:text="Calorie Intake" />
+                android:maxLength="6" />
 
         </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -104,9 +106,26 @@ public class ProfileActivity extends AppCompatActivity {
         System.out.println(UserEmail);
         System.out.println(UserGname);
         Toast.makeText(getApplicationContext(), UserDname, Toast.LENGTH_LONG).show();
+        ImageView profimage = findViewById(R.id.profile_image);
+        Picasso.get().load("https://i.pinimg.com/736x/78/fe/99/78fe99b1ea00a5b81729ad7d8933ada2.jpg").into(profimage);
         googleBtn.setText("Logged in as " + UserDname);
         googleBtn.setAlpha(.5f);
         googleBtn.setEnabled(false);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void sendMessage () {
