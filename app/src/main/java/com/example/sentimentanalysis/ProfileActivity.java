@@ -1,9 +1,13 @@
 package com.example.sentimentanalysis;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,7 +23,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.squareup.picasso.Picasso;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -29,6 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
     Button profileSaveBtn;
     TextView textview;
     EditText ageinput;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private User user;
+    private static final String USER="user";
 
     public static final String EXTRA_MESSAGE = "com.example.Sentiment-Analysis.MESSAGE";
     @Override
@@ -59,12 +80,49 @@ public class ProfileActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+        EditText emailEditText=findViewById(R.id.editTextEmailAddress);
+
+//        EditText passwordEditText=findViewById(R.id.passcode);
+
+
+        database=FirebaseDatabase.getInstance();
+        mDatabase=database.getReference(USER);
+        mAuth = FirebaseAuth.getInstance();
+
         profileSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessage();
+                    String email = emailEditText.getText().toString();
+                    String password = "Wakanda";
+                    User u = new User(email,password, "20","5555555556");
+                    register(email,password);
             }
         });
+    }
+
+    public void register(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    public void updateUI(FirebaseUser Fuser){
+        String keyId=mDatabase.push().getKey();
+        mDatabase.child(keyId).setValue(user);
     }
 
     void signIn() {
@@ -103,13 +161,17 @@ public class ProfileActivity extends AppCompatActivity {
         String UserEmail = act.getEmail();
         String UserGname = act.getGivenName();
         String profilePic = act.getPhotoUrl().toString();
-        System.out.println("url is:" + profilePic);
+        /**System.out.println("url is:" + profilePic);
         System.out.println(UserDname);
         System.out.println(UserEmail);
-        System.out.println(UserGname);
+        System.out.println(UserGname);*/
         Toast.makeText(getApplicationContext(), UserDname, Toast.LENGTH_LONG).show();
         ImageView profimage = findViewById(R.id.profile_image);
         Picasso.get().load(profilePic).into(profimage);
+        EditText PersonNameChange=findViewById(R.id.editTextTextPersonName);
+        PersonNameChange.setText(UserDname);
+        EditText PersonMailChange=findViewById(R.id.editTextEmailAddress);
+        PersonMailChange.setText(UserEmail);
         googleBtn.setText("Logged in as " + UserDname);
         googleBtn.setAlpha(.5f);
         googleBtn.setEnabled(false);

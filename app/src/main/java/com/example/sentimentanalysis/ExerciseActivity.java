@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 public class ExerciseActivity
         extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener{
 
+    int excercise_count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,10 @@ public class ExerciseActivity
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        CheckBox checked = findViewById(R.id.excercisecheck);
+        if(checked.isChecked()){
+            excercise_count+=1;
+        }
     }
 
     @Override
