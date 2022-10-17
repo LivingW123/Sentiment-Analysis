@@ -164,7 +164,32 @@ C
                 android:paddingBottom="20dp">
 
                 <TextView
-                    android:id="@+id/textViewHeight"
+                    android:id="@+id/textViewHeightFeet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/alfa_slab"
+                    android:gravity="center_horizontal"
+                    android:text="Height (Feet)" />
+
+                <EditText
+                    android:id="@+id/editTextHeightFeet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/textViewHeightInches"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -173,7 +198,7 @@ C
                     android:text="Height (Inches)" />
 
                 <EditText
-                    android:id="@+id/editTextHeight"
+                    android:id="@+id/editTextHeightInches"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

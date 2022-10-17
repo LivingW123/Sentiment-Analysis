@@ -1,6 +1,28 @@
 package com.example.sentimentanalysis;
 
 public class User {
+
+    private String username;
+    private String password;
+
+
+
+    private String name;
+    private String age;
+    private String phonenumber;
+    private String gender;
+    private int height;
+
+    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches){
+        this.password=password;
+        this.username=email;
+        this.name=name;
+        this.age=age;
+        this.phonenumber=phonenumber;
+        this.gender=gender;
+        this.height=heightFeet*12+heightInches;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -17,9 +39,32 @@ public class User {
         this.password = password;
     }
 
-    private String username;
-    private String password;
-    private String age;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setHeight(int heightFeet, int heightInches) {
+        this.height = heightFeet*12+heightInches;
+    }
 
     public String getAge() {
         return age;
@@ -37,13 +82,8 @@ public class User {
         this.phonenumber = phonenumber;
     }
 
-    private String phonenumber;
-    public User (String email, String password, String age, String phonenumber){
-        this.password=password;
-        this.username=email;
-        this.age=age;
-        this.phonenumber=phonenumber;
-    }
+
+
 
 
 

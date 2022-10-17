@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView textview;
     EditText ageinput;
     private FirebaseDatabase database;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseUser, mDatabaseEmail;
     private FirebaseAuth mAuth;
     private User user;
     private static final String USER="user";
@@ -84,16 +84,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         EditText emailEditText=findViewById(R.id.editTextEmailAddress);
         EditText nameEditText=findViewById(R.id.editTextTextPersonName);
-        EditText ageEditText=findViewById(R.id.editTextTextPersonName);
-        EditText phone_numberEditText=findViewById(R.id.editTextTextPersonName);
-        EditText heightEditText=findViewById(R.id.editTextTextPersonName);
-        Switch genderEditText=findViewById(R.id.genderswitch);
+        EditText ageEditText=findViewById(R.id.editTextTextPersonAge);
+        EditText phone_numberEditText=findViewById(R.id.editTextTextPersonPhone);
+        EditText heightfeetEditText=findViewById(R.id.editTextHeightFeet);
+        EditText heightinchesEditText=findViewById(R.id.editTextHeightInches);
+        Switch genderEditSwitch=findViewById(R.id.genderswitch);
 
 //        EditText passwordEditText=findViewById(R.id.passcode);
 
 
         database=FirebaseDatabase.getInstance();
-        mDatabase=database.getReference(USER);
+        mDatabaseUser=database.getReference(USER);
+        mDatabaseEmail=database.getReference("emailtoUid");
         mAuth = FirebaseAuth.getInstance();
 
         profileSaveBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,17 +104,25 @@ public class ProfileActivity extends AppCompatActivity {
                     String email = emailEditText.getText().toString();
                     String name = nameEditText.getText().toString();
                     String age = ageEditText.getText().toString();
-                    String phonenumber = phone_numberEditText.getText().toString();
-                    String height = heightEditText.getText().toString();
-                    String password = email;
-                    User u = new User(email, password, name, age);
+                    String phoneNumber = phone_numberEditText.getText().toString();
+                    int heightFeet = Integer.parseInt(heightfeetEditText.getText().toString());
+                    int heightInches = Integer.parseInt(heightinchesEditText.getText().toString());
+                    Boolean switchState = genderEditSwitch.isChecked();
+                    String gender;
+                    if (switchState==true){
+                        gender = "m";
+                    }
+                    else{
+                        gender = "f";
+                    }
+                    System.out.println(gender);
+                String password = email;
+                    User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches);
                     register(email,password);
-                    String keyId=mDatabase.push().getKey();
-                    System.out.println(keyId);
-                    System.out.println(u.toString());
-                    System.out.println(mDatabase.toString());
-                    System.out.println(database.toString());
-                    mDatabase.child("user").child(keyId).setValue(u);
+                    String keyId=mDatabaseUser.push().getKey();
+
+                    mDatabaseUser.child(keyId).setValue(u);
+                    mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
             }
         });
     }
@@ -137,8 +147,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void updateUI(FirebaseUser Fuser){
-        String keyId=mDatabase.push().getKey();
-        mDatabase.child(keyId).setValue(user);
+        String keyId=mDatabaseUser.push().getKey();
+        mDatabaseUser.child(keyId).setValue(user);
     }
 
     void signIn() {
