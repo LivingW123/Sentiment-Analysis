@@ -31,14 +31,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/excercise_type_label"
+                    android:id="@+id/exercise_type_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Excercise Type:" />
+                    android:text="Exercise Type:" />
 
                 <Spinner
-                    android:id="@+id/excercise_type_spinner"
+                    android:id="@+id/exercise_type_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -82,11 +82,11 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/excercisecheck"
+                android:id="@+id/exercise_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="I have excercised today :)"
+                android:text="I have exercised today :)"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -99,7 +99,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="excercise type-- v same thing below" />
+                android:text="exercise type-- v same thing below" />
 
             <TextView
                 android:id="@+id/textView7"

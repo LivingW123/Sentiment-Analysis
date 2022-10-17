@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "928689311084",
+    "firebase_url": "https://sentiment-analysis-3f48c-default-rtdb.firebaseio.com",
     "project_id": "sentiment-analysis-3f48c",
     "storage_bucket": "sentiment-analysis-3f48c.appspot.com"
   },

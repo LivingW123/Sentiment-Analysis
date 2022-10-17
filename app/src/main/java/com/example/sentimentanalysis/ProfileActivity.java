@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +83,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         EditText emailEditText=findViewById(R.id.editTextEmailAddress);
+        EditText nameEditText=findViewById(R.id.editTextTextPersonName);
+        EditText ageEditText=findViewById(R.id.editTextTextPersonName);
+        EditText phone_numberEditText=findViewById(R.id.editTextTextPersonName);
+        EditText heightEditText=findViewById(R.id.editTextTextPersonName);
+        Switch genderEditText=findViewById(R.id.genderswitch);
 
 //        EditText passwordEditText=findViewById(R.id.passcode);
 
@@ -94,9 +100,19 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     String email = emailEditText.getText().toString();
-                    String password = "Wakanda";
-                    User u = new User(email,password, "20","5555555556");
+                    String name = nameEditText.getText().toString();
+                    String age = ageEditText.getText().toString();
+                    String phonenumber = phone_numberEditText.getText().toString();
+                    String height = heightEditText.getText().toString();
+                    String password = email;
+                    User u = new User(email, password, name, age);
                     register(email,password);
+                    String keyId=mDatabase.push().getKey();
+                    System.out.println(keyId);
+                    System.out.println(u.toString());
+                    System.out.println(mDatabase.toString());
+                    System.out.println(database.toString());
+                    mDatabase.child("user").child(keyId).setValue(u);
             }
         });
     }
@@ -159,7 +175,6 @@ public class ProfileActivity extends AppCompatActivity {
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
         String UserDname = act.getDisplayName();
         String UserEmail = act.getEmail();
-        String UserGname = act.getGivenName();
         String profilePic = act.getPhotoUrl().toString();
         /**System.out.println("url is:" + profilePic);
         System.out.println(UserDname);

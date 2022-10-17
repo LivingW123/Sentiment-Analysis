@@ -13,20 +13,20 @@ public class ExerciseActivity
         extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener{
 
-    int excercise_count=0;
+    int exercise_count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        Spinner spinner = findViewById(R.id.excercise_type_spinner);
+        Spinner spinner = findViewById(R.id.exercise_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.excercise, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-        CheckBox checked = findViewById(R.id.excercisecheck);
+        CheckBox checked = findViewById(R.id.exercise_check);
         if(checked.isChecked()){
-            excercise_count+=1;
+            exercise_count+=1;
         }
     }
 

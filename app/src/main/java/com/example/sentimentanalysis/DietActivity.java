@@ -60,7 +60,8 @@ public class DietActivity extends AppCompatActivity {
         else{
             rec_calories=9.56*weight+1.85*height-4.68*age+655;
         }
-        smth.setText(""+rec_calories);
+        int rec_rounded = (int)Math.round(rec_calories);
+        smth.setText(""+rec_rounded);
         int act_calories = 0;
 
         EditText real_calories = findViewById(R.id.real_calories);
@@ -81,7 +82,6 @@ public class DietActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 //get calories rec for every person
                 int numCals;
-                int rec_rounded = (int)Math.round(rec_calories);
                 if (s.toString().equals("")){
                     numCals = 0;
                     getEntries(numCals,rec_rounded);
