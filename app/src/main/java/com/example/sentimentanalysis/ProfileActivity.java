@@ -36,6 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -67,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
 
         if(act != null){
-            doCoolStuff();
+            changeUI();
         }
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
-                doCoolStuff();
+                changeUI();
             } catch (ApiException e) {
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "oops", Toast.LENGTH_SHORT).show();
@@ -183,10 +185,48 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     String UserEmail;
-    void doCoolStuff(){
+    void changeUI(){
+        database=FirebaseDatabase.getInstance();
+        mDatabaseUser=database.getReference(USER);
+        mDatabaseEmail=database.getReference("emailtoUid");
+
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
         String UserDname = act.getDisplayName();
         UserEmail = act.getEmail();
+
+        mDatabaseEmail.child(UserEmail.replaceAll("[.#$]" , ",")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("test lol"+dataSnapshot.getValue().toString());
+                String UserId=dataSnapshot.getValue().toString();
+
+                mDatabaseUser.child(UserId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        User u = (User) snapshot.getKey();
+//                        System.out.println(u.getAge());
+                        HashMap hm = (HashMap) snapshot.getValue();
+                        System.out.println(hm.get("password"));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
         String profilePic = act.getPhotoUrl().toString();
         /**System.out.println("url is:" + profilePic);
         System.out.println(UserDname);
@@ -215,48 +255,37 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-//    public void retrieve(){
-//        System.out.println(mDatabaseEmail+UserEmail);
-//
-//        EditText ageChange=findViewById(R.id.editTextTextPersonAge);
-//        EditText phone_numberChange=findViewById(R.id.editTextTextPersonPhone);
-//        EditText heightfeetChange=findViewById(R.id.editTextHeightFeet);
-//        EditText heightinchesChange=findViewById(R.id.editTextHeightInches);
-//        EditText weightChange=findViewById(R.id.editTextWeight);
-//        Switch genderChange=findViewById(R.id.genderswitch);
-//
-//        ageChange.setText("lol");
-//        phone_numberChange.setText("lol");
-//        heightfeetChange.setText("lol");
-//        heightinchesChange.setText("lol");
-//        weightChange.setText("lol");
-//    }
-//
-//    ValueEventListener postListener = new ValueEventListener() {
-//        @Override
-//        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//            User post = DataSnapshot.getValue(User.class);
-//        }
-//
-//        @Override
-//        public void onCancelled(@NonNull DatabaseError error) {
-//            Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-//        }
-//    };
-//    mPostReference.addValueEventListener(postListener);
+    public void retrieve(){
+        System.out.println(mDatabaseEmail+UserEmail);
+
+        EditText ageChange=findViewById(R.id.editTextTextPersonAge);
+        EditText phone_numberChange=findViewById(R.id.editTextTextPersonPhone);
+        EditText heightfeetChange=findViewById(R.id.editTextHeightFeet);
+        EditText heightinchesChange=findViewById(R.id.editTextHeightInches);
+        EditText weightChange=findViewById(R.id.editTextWeight);
+        Switch genderChange=findViewById(R.id.genderswitch);
+
+        ageChange.setText("lol");
+        phone_numberChange.setText("lol");
+        heightfeetChange.setText("lol");
+        heightinchesChange.setText("lol");
+        weightChange.setText("lol");
+    }
+
+
 //
 //    public void editProfile(){
 //
 //    }
 //
 //    public void accountCheck(){
-//        if ((database.getReference("emailtoUid")).hasChild(UserEmail.replaceAll("[.#$]" , ","))){
+//        if ((database.getReference("emailtoUid")).child(UserEmail.replaceAll("[.#$]" , ","))==null){
 //            ;
 //        }
 //        else{
 //            System.out.println("account already made");
 //        }
 //    }
-//
-//
-//}
+
+
+}
