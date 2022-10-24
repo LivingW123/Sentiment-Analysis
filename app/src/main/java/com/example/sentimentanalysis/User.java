@@ -12,8 +12,11 @@ public class User {
     private String phonenumber;
     private String gender;
     private int height;
+    private int weight;
 
-    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches){
+
+
+    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches, int weight){
         this.password=password;
         this.username=email;
         this.name=name;
@@ -21,6 +24,7 @@ public class User {
         this.phonenumber=phonenumber;
         this.gender=gender;
         this.height=heightFeet*12+heightInches;
+        this.weight=weight;
     }
 
     public String getUsername() {
@@ -46,6 +50,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getGender() {
         return gender;
     }
@@ -82,7 +87,13 @@ public class User {
         this.phonenumber = phonenumber;
     }
 
+    public int getWeight() {
+        return weight;
+    }
 
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
 
 

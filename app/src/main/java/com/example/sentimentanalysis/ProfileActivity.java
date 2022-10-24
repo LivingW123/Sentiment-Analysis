@@ -88,10 +88,10 @@ public class ProfileActivity extends AppCompatActivity {
         EditText phone_numberEditText=findViewById(R.id.editTextTextPersonPhone);
         EditText heightfeetEditText=findViewById(R.id.editTextHeightFeet);
         EditText heightinchesEditText=findViewById(R.id.editTextHeightInches);
+        EditText weightEditText=findViewById(R.id.editTextWeight);
         Switch genderEditSwitch=findViewById(R.id.genderswitch);
 
 //        EditText passwordEditText=findViewById(R.id.passcode);
-
 
         database=FirebaseDatabase.getInstance();
         mDatabaseUser=database.getReference(USER);
@@ -107,6 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String phoneNumber = phone_numberEditText.getText().toString();
                     int heightFeet = Integer.parseInt(heightfeetEditText.getText().toString());
                     int heightInches = Integer.parseInt(heightinchesEditText.getText().toString());
+                    int weight = Integer.parseInt(weightEditText.getText().toString());
                     Boolean switchState = genderEditSwitch.isChecked();
                     String gender;
                     if (switchState==true){
@@ -117,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                     System.out.println(gender);
                 String password = email;
-                    User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches);
+                    User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
                     register(email,password);
                     String keyId=mDatabaseUser.push().getKey();
 
@@ -181,10 +182,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    String UserEmail;
     void doCoolStuff(){
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
         String UserDname = act.getDisplayName();
-        String UserEmail = act.getEmail();
+        UserEmail = act.getEmail();
         String profilePic = act.getPhotoUrl().toString();
         /**System.out.println("url is:" + profilePic);
         System.out.println(UserDname);
@@ -202,19 +204,6 @@ public class ProfileActivity extends AppCompatActivity {
         googleBtn.setEnabled(false);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void sendMessage () {
@@ -226,7 +215,48 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-
-
-
-}
+//    public void retrieve(){
+//        System.out.println(mDatabaseEmail+UserEmail);
+//
+//        EditText ageChange=findViewById(R.id.editTextTextPersonAge);
+//        EditText phone_numberChange=findViewById(R.id.editTextTextPersonPhone);
+//        EditText heightfeetChange=findViewById(R.id.editTextHeightFeet);
+//        EditText heightinchesChange=findViewById(R.id.editTextHeightInches);
+//        EditText weightChange=findViewById(R.id.editTextWeight);
+//        Switch genderChange=findViewById(R.id.genderswitch);
+//
+//        ageChange.setText("lol");
+//        phone_numberChange.setText("lol");
+//        heightfeetChange.setText("lol");
+//        heightinchesChange.setText("lol");
+//        weightChange.setText("lol");
+//    }
+//
+//    ValueEventListener postListener = new ValueEventListener() {
+//        @Override
+//        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//            User post = DataSnapshot.getValue(User.class);
+//        }
+//
+//        @Override
+//        public void onCancelled(@NonNull DatabaseError error) {
+//            Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+//        }
+//    };
+//    mPostReference.addValueEventListener(postListener);
+//
+//    public void editProfile(){
+//
+//    }
+//
+//    public void accountCheck(){
+//        if ((database.getReference("emailtoUid")).hasChild(UserEmail.replaceAll("[.#$]" , ","))){
+//            ;
+//        }
+//        else{
+//            System.out.println("account already made");
+//        }
+//    }
+//
+//
+//}
