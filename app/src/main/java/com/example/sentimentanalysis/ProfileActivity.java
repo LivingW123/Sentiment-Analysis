@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,136 +36,186 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final String USER_DATA="user";
+    private static final String USER_MAP="emailtoUid";
+    public static final String EXTRA_MESSAGE = "com.example.Sentiment-Analysis.MESSAGE";
+
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
+    FirebaseDatabase database;
+    DatabaseReference mDatabaseUser, mDatabaseEmail;
+    User user;
+
     Button googleBtn;
     Button signOutBtn;
     Button profileSaveBtn;
-    TextView textview;
-    EditText ageinput;
-    private FirebaseDatabase database;
-    private DatabaseReference mDatabaseUser, mDatabaseEmail;
-    private FirebaseAuth mAuth;
-    private User user;
-    private static final String USER="user";
+    EditText emailEditText;
+    EditText nameEditText;
+    EditText ageEditText;
+    EditText phone_numberEditText;
+    EditText heightfeetEditText;
+    EditText heightinchesEditText;
+    EditText weightEditText;
+    Switch genderEditSwitch;
 
-    public static final String EXTRA_MESSAGE = "com.example.Sentiment-Analysis.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //get firebase database + necessary refs
+        database=FirebaseDatabase.getInstance();
+        mDatabaseUser=database.getReference(USER_DATA);
+        mDatabaseEmail=database.getReference(USER_MAP);
 
+        //connect to ui elems
         googleBtn = this.findViewById(R.id.google_button);
-        signOutBtn   = findViewById(R.id.signOutBtn);
+        signOutBtn = findViewById(R.id.signOutBtn);
         profileSaveBtn = this.findViewById(R.id.profilesave);
+        emailEditText=findViewById(R.id.editTextEmailAddress);
+        nameEditText=findViewById(R.id.editTextTextPersonName);
+        ageEditText=findViewById(R.id.editTextTextPersonAge);
+        phone_numberEditText=findViewById(R.id.editTextTextPersonPhone);
+        heightfeetEditText=findViewById(R.id.editTextHeightFeet);
+        heightinchesEditText=findViewById(R.id.editTextHeightInches);
+        weightEditText=findViewById(R.id.editTextWeight);
+        genderEditSwitch=findViewById(R.id.genderswitch);
+
+        //googlesignin/authentication setup
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
 
+        //if there's already a signed in user in the session fill the activity with its info
         if(act != null){
-            changeUI();
+            //formerly doCoolStuff/updateUI
+            fillUserInfo(act);
         }
-        googleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
 
-        EditText emailEditText=findViewById(R.id.editTextEmailAddress);
-        EditText nameEditText=findViewById(R.id.editTextTextPersonName);
-        EditText ageEditText=findViewById(R.id.editTextTextPersonAge);
-        EditText phone_numberEditText=findViewById(R.id.editTextTextPersonPhone);
-        EditText heightfeetEditText=findViewById(R.id.editTextHeightFeet);
-        EditText heightinchesEditText=findViewById(R.id.editTextHeightInches);
-        EditText weightEditText=findViewById(R.id.editTextWeight);
-        Switch genderEditSwitch=findViewById(R.id.genderswitch);
+        //appropriate clicklisteners
+        googleBtn.setOnClickListener(view -> signIn());
+        signOutBtn.setOnClickListener(view -> signOut());
+        profileSaveBtn.setOnClickListener(view -> {
 
-//        EditText passwordEditText=findViewById(R.id.passcode);
-
-        database=FirebaseDatabase.getInstance();
-        mDatabaseUser=database.getReference(USER);
-        mDatabaseEmail=database.getReference("emailtoUid");
-        mAuth = FirebaseAuth.getInstance();
-
-        profileSaveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    String email = emailEditText.getText().toString();
-                    String name = nameEditText.getText().toString();
-                    String age = ageEditText.getText().toString();
-                    String phoneNumber = phone_numberEditText.getText().toString();
-                    int heightFeet = Integer.parseInt(heightfeetEditText.getText().toString());
-                    int heightInches = Integer.parseInt(heightinchesEditText.getText().toString());
-                    int weight = Integer.parseInt(weightEditText.getText().toString());
-                    Boolean switchState = genderEditSwitch.isChecked();
-                    String gender;
-                    if (switchState==true){
-                        gender = "m";
-                    }
-                    else{
-                        gender = "f";
-                    }
-                    System.out.println(gender);
+            //register data from all edittext fields
+            //TODO: establish acceptable range of data in each field, write conditionals to ensure data integrity
+                String email = emailEditText.getText().toString();
                 String password = email;
-                    User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
-                    register(email,password);
-                    String keyId=mDatabaseUser.push().getKey();
+                String name = nameEditText.getText().toString();
+                String age = ageEditText.getText().toString();
+                String phoneNumber = phone_numberEditText.getText().toString();
+                int heightFeet = Integer.parseInt(heightfeetEditText.getText().toString());
+                int heightInches = Integer.parseInt(heightinchesEditText.getText().toString());
+                int weight = Integer.parseInt(weightEditText.getText().toString());
+                boolean switchState = genderEditSwitch.isChecked();
+                String gender = "f";
+                if (switchState){
+                    gender = "m";
+                }
 
-                    mDatabaseUser.child(keyId).setValue(u);
-                    mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
-            }
+                //generate appropriate User obj
+                User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
+                //do NOT call register is there's a google user in session! otherwise you get a (thankfully) handled error
+                if(act != null) {
+                    register(email, password);
+                }
+
+                //push new data to firebase
+                String keyId=mDatabaseUser.push().getKey();
+                //new obj added into firebase
+                mDatabaseUser.child(keyId).setValue(u);
+                //key added to email/id hashmap
+                mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
         });
     }
 
-    public void register(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(null);
+    void fillUserInfo(GoogleSignInAccount act){
+        //get firebase database, you can also try deleting these three lines and retesting your cases as oncreate has same code
+        database=FirebaseDatabase.getInstance();
+        mDatabaseUser=database.getReference(USER_DATA);
+        mDatabaseEmail=database.getReference(USER_MAP);
+
+        //get needed ui elements
+        ImageView profimage = findViewById(R.id.profile_image);
+        EditText PersonNameChange=findViewById(R.id.editTextTextPersonName);
+        EditText PersonMailChange=findViewById(R.id.editTextEmailAddress);
+
+        //get data associated with google acct (NOT object)
+        String UserDname = act.getDisplayName();
+        String UserEmail = act.getEmail();
+        Uri profilePic = act.getPhotoUrl();
+
+        //first add value event listener tries to retrieve appropriate id given user email
+        mDatabaseEmail.child(UserEmail.replaceAll("[.#$]" , ",")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null)
+                {
+                    String UserId=dataSnapshot.getValue().toString();
+                    DatabaseReference userRef= mDatabaseUser.child(UserId);
+                    //second add value event listener tries to retrieve the actual properties of the original user object.
+                    userRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap hm = (HashMap) snapshot.getValue();
+                            ageEditText.setText("" + hm.get("age"));
+                            heightfeetEditText.setText("" + ((long)hm.get("height")/12));
+                            heightinchesEditText.setText("" + ((long)hm.get("height")%12));
+                            phone_numberEditText.setText("" + hm.get("phonenumber"));
+                            weightEditText.setText("" + hm.get("weight"));
+                            genderEditSwitch.setChecked(false);
+                            if(hm.get("gender").equals("m"))
+                            {
+                                genderEditSwitch.setChecked(true);
+                            }
                         }
-                    }
-                });
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            //error msg here
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //load google acct data into interface
+        Toast.makeText(getApplicationContext(), "Welcome, " + UserDname + "!", Toast.LENGTH_LONG).show();
+        if(profilePic != null)
+        {
+            Picasso.get().load(profilePic.toString()).into(profimage);
+        }
+        PersonNameChange.setText(UserDname);
+        PersonMailChange.setText(UserEmail);
+
+        googleBtn.setText("Logged in as " + UserDname);
+        googleBtn.setAlpha(.5f);
+        googleBtn.setEnabled(false);
     }
 
-    public void updateUI(FirebaseUser Fuser){
-        String keyId=mDatabaseUser.push().getKey();
-        mDatabaseUser.child(keyId).setValue(user);
-    }
-
+    //generates the google signin page/activity
     void signIn() {
         Intent signInIntent = gsc.getSignInIntent();
         startActivityForResult(signInIntent, 1000);
     }
 
+    //does what it says it does...
     void signOut(){
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(Task<Void> task) {
                 finish();
-                startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             }
         });
     }
@@ -176,7 +227,11 @@ public class ProfileActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
-                changeUI();
+
+                //at this point, there's a google acct signed into the app. so this line is safe to call
+                GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
+                //filll ui with act's data
+                fillUserInfo(act);
             } catch (ApiException e) {
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "oops", Toast.LENGTH_SHORT).show();
@@ -184,108 +239,29 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    String UserEmail;
-    void changeUI(){
-        database=FirebaseDatabase.getInstance();
-        mDatabaseUser=database.getReference(USER);
-        mDatabaseEmail=database.getReference("emailtoUid");
+    public void register(String email, String password){
+        //access authentication data of app
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
-        String UserDname = act.getDisplayName();
-        UserEmail = act.getEmail();
-
-        mDatabaseEmail.child(UserEmail.replaceAll("[.#$]" , ",")).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("test lol"+dataSnapshot.getValue().toString());
-                String UserId=dataSnapshot.getValue().toString();
-
-                mDatabaseUser.child(UserId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        User u = (User) snapshot.getKey();
-//                        System.out.println(u.getAge());
-                        HashMap hm = (HashMap) snapshot.getValue();
-                        System.out.println(hm.get("password"));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
+        //creates user here, totally independent from realtime database
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        updateUI(null);
                     }
                 });
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-
-
-        String profilePic = act.getPhotoUrl().toString();
-        /**System.out.println("url is:" + profilePic);
-        System.out.println(UserDname);
-        System.out.println(UserEmail);
-        System.out.println(UserGname);*/
-        Toast.makeText(getApplicationContext(), UserDname, Toast.LENGTH_LONG).show();
-        ImageView profimage = findViewById(R.id.profile_image);
-        Picasso.get().load(profilePic).into(profimage);
-        EditText PersonNameChange=findViewById(R.id.editTextTextPersonName);
-        PersonNameChange.setText(UserDname);
-        EditText PersonMailChange=findViewById(R.id.editTextEmailAddress);
-        PersonMailChange.setText(UserEmail);
-        googleBtn.setText("Logged in as " + UserDname);
-        googleBtn.setAlpha(.5f);
-        googleBtn.setEnabled(false);
-
-
     }
 
-    public void sendMessage () {
-        Intent intent = new Intent(this,DietActivity.class);
-        EditText ageinput = (EditText) findViewById(R.id.editTextTextPersonAge);
-        String message = ageinput.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+    public void updateUI(FirebaseUser Fuser){
+        String keyId=mDatabaseUser.push().getKey();
+        mDatabaseUser.child(keyId).setValue(user);
     }
-
-
-    public void retrieve(){
-        System.out.println(mDatabaseEmail+UserEmail);
-
-        EditText ageChange=findViewById(R.id.editTextTextPersonAge);
-        EditText phone_numberChange=findViewById(R.id.editTextTextPersonPhone);
-        EditText heightfeetChange=findViewById(R.id.editTextHeightFeet);
-        EditText heightinchesChange=findViewById(R.id.editTextHeightInches);
-        EditText weightChange=findViewById(R.id.editTextWeight);
-        Switch genderChange=findViewById(R.id.genderswitch);
-
-        ageChange.setText("lol");
-        phone_numberChange.setText("lol");
-        heightfeetChange.setText("lol");
-        heightinchesChange.setText("lol");
-        weightChange.setText("lol");
-    }
-
-
-//
-//    public void editProfile(){
-//
-//    }
-//
-//    public void accountCheck(){
-//        if ((database.getReference("emailtoUid")).child(UserEmail.replaceAll("[.#$]" , ","))==null){
-//            ;
-//        }
-//        else{
-//            System.out.println("account already made");
-//        }
-//    }
-
 
 }
