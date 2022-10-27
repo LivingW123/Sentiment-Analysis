@@ -120,10 +120,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 //generate appropriate User obj
                 User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
-                //do NOT call register is there's a google user in session! otherwise you get a (thankfully) handled error
-                if(act != null) {
-                    register(email, password);
-                }
+
+                register(email, password);
 
                 //push new data to firebase
                 String keyId=mDatabaseUser.push().getKey();
@@ -135,10 +133,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     void fillUserInfo(GoogleSignInAccount act){
-        //get firebase database, you can also try deleting these three lines and retesting your cases as oncreate has same code
-        database=FirebaseDatabase.getInstance();
-        mDatabaseUser=database.getReference(USER_DATA);
-        mDatabaseEmail=database.getReference(USER_MAP);
 
         //get needed ui elements
         ImageView profimage = findViewById(R.id.profile_image);
@@ -150,13 +144,13 @@ public class ProfileActivity extends AppCompatActivity {
         String UserEmail = act.getEmail();
         Uri profilePic = act.getPhotoUrl();
 
-        //first add value event listener tries to retrieve appropriate id given user email
-        mDatabaseEmail.child(UserEmail.replaceAll("[.#$]" , ",")).addValueEventListener(new ValueEventListener() {
+        String email =  UserEmail.replaceAll("[.#$]" , ",");
+        mDatabaseEmail.child(email).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null)
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue() != null)
                 {
-                    String UserId=dataSnapshot.getValue().toString();
+                    String UserId = snapshot.getValue().toString();
                     DatabaseReference userRef= mDatabaseUser.child(UserId);
                     //second add value event listener tries to retrieve the actual properties of the original user object.
                     userRef.addValueEventListener(new ValueEventListener() {
@@ -230,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 //at this point, there's a google acct signed into the app. so this line is safe to call
                 GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
-                //filll ui with act's data
+                //fill ui with act's data
                 fillUserInfo(act);
             } catch (ApiException e) {
                 e.printStackTrace();
@@ -242,7 +236,6 @@ public class ProfileActivity extends AppCompatActivity {
     public void register(String email, String password){
         //access authentication data of app
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
         //creates user here, totally independent from realtime database
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -254,7 +247,8 @@ public class ProfileActivity extends AppCompatActivity {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        updateUI(null);
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
                     }
                 });
     }
