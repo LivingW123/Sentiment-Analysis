@@ -5,4 +5,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="teal">#FF018786</color>
+    <color name="background_gradient_start">#E6B711</color>
+    <color name="background_gradient_end">#2FECD1</color>
 </resources>
