@@ -79,34 +79,6 @@ public class ChatActivity extends AppCompatActivity {
         this.inputMessage.setText("");
         this.initialRequest = true;
 
-
-        int permission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            Log.i(TAG, "Permission to record denied");
-            makeRequest();
-        } else {
-            Log.i(TAG, "Permission to record was already granted");
-        }
-
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
-                Message audioMessage = (Message) messageArrayList.get(position);
-                if (audioMessage != null && !audioMessage.getMessage().isEmpty()) {
-                    new SayTask().execute(audioMessage.getMessage());
-                }
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                recordMessage();
-
-            }
-        }));
-
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
         return true;
     }
 
@@ -193,9 +165,6 @@ public class ChatActivity extends AppCompatActivity {
                                     outMessage.setId("2");
 
                                     messageArrayList.add(outMessage);
-
-                                    // speak the message
-                                    new SayTask().execute(outMessage.getMessage());
                                     break;
 
                                 case "option":
@@ -211,17 +180,11 @@ public class ChatActivity extends AppCompatActivity {
                                     outMessage.setId("2");
 
                                     messageArrayList.add(outMessage);
-
-                                    // speak the message
-                                    new SayTask().execute(outMessage.getMessage());
                                     break;
 
                                 case "image":
                                     outMessage = new Message(r);
                                     messageArrayList.add(outMessage);
-
-                                    // speak the description
-                                    new SayTask().execute("You received an image: " + outMessage.getTitle() + outMessage.getDescription());
                                     break;
                                 default:
                                     Log.e("Error", "Unhandled message type");
