@@ -21,8 +21,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_blue"
+            android:layout_height="50dp"
+            android:background="@drawable/purple_gradient_banner"
             app:popupTheme="@style/Theme.SentimentAnalysis.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -37,6 +37,7 @@
         android:paddingVertical="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
@@ -44,270 +45,329 @@
             android:id="@+id/MainPageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gothic_a1_semibold"
             android:gravity="center"
-            android:text="My Home Page"
+            android:text="Dashboard"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/white"
             android:textSize="22sp" />
 
-        <LinearLayout
-            android:id="@+id/ChatSelection"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="1">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/message_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/ChatIcon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="15dp"
-                    app:srcCompat="@drawable/messageicon" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ChatSelectionText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/ChatHeader"
-                    style="@style/ChatButton"
-                    android:layout_height="50dp"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center"
-                    android:text="Messaging"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/ChatDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Get a hlpful AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
+                android:id="@+id/ChatSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_pink"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="1">
 
-                <Button
-                    android:id="@+id/ButtonChat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ExerciseSelection"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:id="@+id/badLinearLayout"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/ExerciseIcon"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="15dp"
-                    app:srcCompat="@drawable/fitness" />
-            </LinearLayout>
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ExerciseSelectionText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ChatIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="15dp"
+                        app:srcCompat="@drawable/messageicon" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/ExerciseHeader"
-                    style="@style/ChatButton"
-                    android:layout_height="50dp"
-                    android:fontFamily="sans-serif-condensed"
+                <LinearLayout
+                    android:id="@+id/ChatSelectionText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ChatHeader"
+                        style="@style/ChatButton"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Messaging"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ChatDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:layout_margin="1dp"
+                        android:text="Get a hlpful AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
                     android:gravity="center"
-                    android:text="Work Out"
-                    android:textSize="20sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/ExerciseDescription"
-                    android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/ButtonChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send Text!"
+                        android:fontFamily="@font/alata"
+                        android:layout_margin="5dp"
+                        android:textSize="13dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/exercise_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:id="@+id/ExerciseSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="@color/light_pink"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:id="@+id/badLinearLayout"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Feeling stuck? Maybe a quick stretch or an intense workout can turn your day around." />
-            </LinearLayout>
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ExerciseIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        app:srcCompat="@drawable/fitness" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/ButtonExercise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/MusicSelection"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/MusicIcon"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/ExerciseSelectionText"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="15dp"
-                    app:srcCompat="@drawable/music" />
-            </LinearLayout>
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/MusicSelectionText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/ExerciseHeader"
+                        style="@style/ChatButton"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="Exercise"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/MusicHeader"
-                    style="@style/ChatButton"
-                    android:layout_height="50dp"
-                    android:fontFamily="sans-serif-condensed"
+                    <TextView
+                        android:id="@+id/ExerciseDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:text="Feeling stuck? Maybe a quick stretch or an intense workout can turn your day around." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
                     android:gravity="center"
-                    android:text="Music"
-                    android:textSize="20sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/MusicDescription"
-                    android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/ButtonExercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Work out!"
+                        android:fontFamily="@font/alata"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/music_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:id="@+id/MusicSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="@color/light_pink"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Rocking to the 80s or whistling to the newest tune? Here are our recommendations based on your preferences." />
-            </LinearLayout>
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/MusicIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        app:srcCompat="@drawable/music" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/ButtonMusic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/DietSelection"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/DietIcon"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/MusicSelectionText"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="15dp"
-                    app:srcCompat="@drawable/food" />
-            </LinearLayout>
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/DietSelectionText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/MusicHeader"
+                        style="@style/ChatButton"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="Music"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/DietHeader"
-                    style="@style/ChatButton"
-                    android:layout_height="50dp"
-                    android:fontFamily="sans-serif-condensed"
+                    <TextView
+                        android:id="@+id/MusicDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:text="Rocking to the 80s or whistling to the newest tune? Here are our recommendations." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
                     android:gravity="center"
-                    android:text="Diet Plan"
-                    android:textSize="20sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/DietDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Ireegular eating schedule, unhealthy eating, or simply hungry? Grab a recipe and eat in comfort." />
+                    <Button
+                        android:id="@+id/ButtonMusic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Roll On!"
+                        android:fontFamily="@font/alata"
+                        android:textSize="13dp"/>
+                </LinearLayout>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/food_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:id="@+id/DietSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_pink"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="1">
 
-                <Button
-                    android:id="@+id/ButtonDiet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Button" />
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/DietIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        app:srcCompat="@drawable/food" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DietSelectionText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/DietHeader"
+                        style="@style/ChatButton"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="Diet Plan"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/DietDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="Iregular eating schedule, unhealthy eating, or simply hungry? Grab a recipe and eat in comfort." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/ButtonDiet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Grab a meal!"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textSize="13sp"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

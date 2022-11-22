@@ -22,7 +22,7 @@
         android:autoLink="web"
         android:background="@drawable/left_bubble"
         android:fontFamily="sans-serif"
-        android:textColor="@android:color/black"
+        android:textColor="#000D29"
         android:textIsSelectable="true"
         android:textSize="14sp" />
 
