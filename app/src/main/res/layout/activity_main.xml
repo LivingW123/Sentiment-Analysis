@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
+        android:layout_gravity="bottom"
         android:theme="@style/Theme.SentimentAnalysis.AppBarOverlay"
         app:layout_constraintBottom_toTopOf="@+id/MainList"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +110,7 @@
                         android:layout_weight="1"
                         android:gravity="center|left"
                         android:layout_margin="1dp"
-                        android:text="Get a hlpful AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
+                        android:text="Get an AI diagnosis that can analyze your feelings and understands you a little more through algorithms." />
                 </LinearLayout>
 
                 <LinearLayout
@@ -119,12 +120,13 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/ButtonChat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Send Text!"
-                        android:fontFamily="@font/alata"
+                        android:background="@drawable/dash_button"
+                        android:fontFamily="@font/gothic_a1_semibold"
                         android:layout_margin="5dp"
                         android:textSize="13dp"/>
                 </LinearLayout>
@@ -199,13 +201,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/ButtonExercise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:background="@drawable/dash_button"
+                        android:fontFamily="@font/gothic_a1_semibold"
                         android:text="Work out!"
-                        android:fontFamily="@font/alata"
                         android:textSize="13dp" />
                 </LinearLayout>
 
@@ -277,13 +280,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/ButtonMusic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:background="@drawable/dash_button"
                         android:text="Roll On!"
-                        android:fontFamily="@font/alata"
+                        android:fontFamily="@font/gothic_a1_semibold"
                         android:textSize="13dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -355,13 +359,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/ButtonDiet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:background="@drawable/dash_button"
                         android:text="Grab a meal!"
-                        android:fontFamily="sans-serif-condensed"
+                        android:fontFamily="@font/gothic_a1_semibold"
                         android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>

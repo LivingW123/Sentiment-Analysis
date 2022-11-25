@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ExerciseActivity
         extends AppCompatActivity
@@ -18,6 +20,11 @@ public class ExerciseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
+
+        int DailyReset=0;
+        Date currentTime = Calendar.getInstance().getTime();
+
+
 
         Spinner spinner = findViewById(R.id.exercise_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.excercise, android.R.layout.simple_spinner_item);
