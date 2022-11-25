@@ -4,6 +4,7 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -54,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button googleBtn;
     Button signOutBtn;
     Button profileSaveBtn;
+    AppCompatButton EditProfileButton;
     EditText emailEditText;
     EditText nameEditText;
     EditText ageEditText;
@@ -68,12 +73,20 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        ImageButton ToHome = this.findViewById(R.id.HomeButton);
+        ToHome.setOnClickListener(this::onHomeClicked);
+
+
+
         //get firebase database + necessary refs
         database=FirebaseDatabase.getInstance();
         mDatabaseUser=database.getReference(USER_DATA);
         mDatabaseEmail=database.getReference(USER_MAP);
 
         //connect to ui elems
+        EditProfileButton = this.findViewById(R.id.EditProfileButton);
+
+
         googleBtn = this.findViewById(R.id.google_button);
         signOutBtn = findViewById(R.id.signOutBtn);
         profileSaveBtn = this.findViewById(R.id.profilesave);
@@ -256,6 +269,12 @@ public class ProfileActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser Fuser){
         String keyId=mDatabaseUser.push().getKey();
         mDatabaseUser.child(keyId).setValue(user);
+    }
+
+
+    private void onHomeClicked(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

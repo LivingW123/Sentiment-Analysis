@@ -6,11 +6,14 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven {
+            url  "https://dl.bintray.com/ibm-cloud-sdks/ibm-cloud-sdk-repo"
+        }
     }
 }
 rootProject.name = "Sentiment Analysis"
