@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sentimentanalysis.DietActivity">
+
+
+    <item
+        android:title="Vegan"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Kosher"
+        android:icon="@drawable/kosher"/>
+
+    <item
+        android:title="Gluten-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Milk-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Fish-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Nut-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Crustacean-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Egg-Free"
+        android:icon="@drawable/vegan"/>
+
+    <item
+        android:title="Seasame-Free"
+        android:icon="@drawable/vegan"/>
+</menu>

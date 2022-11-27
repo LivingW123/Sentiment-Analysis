@@ -330,6 +330,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
+                android:background="@drawable/dash_button"
                 android:text="Save Profile" />
 
             <Button
@@ -339,12 +340,14 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
+                android:background="@drawable/dash_button"
                 android:text="Sign In With Google" />
 
             <Button
                 android:id="@+id/signOutBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/dash_button"
                 android:layout_gravity="center_horizontal"
                 android:text="Sign Out" />
         </LinearLayout>

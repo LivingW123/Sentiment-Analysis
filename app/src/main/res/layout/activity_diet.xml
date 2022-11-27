@@ -6,99 +6,308 @@
     android:layout_height="match_parent"
     tools:context=".DietActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical"
-        android:paddingVertical="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/DietTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingVertical="10dp"
-            android:textSize="25sp"
-            android:fontFamily="@font/gothic_a1_semibold"
-            android:textColor="#FFF2BF"
-            android:text="My Diet" />
-
-        <TextView
-            android:id="@+id/agetext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="Must fill out age, gender, height, and weight in profile" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="1dp"
+            android:layout_marginBottom="1dp"
+            android:orientation="vertical"
+            android:paddingVertical="10dp">
+
             <TextView
-                android:id="@+id/rec_calorie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:text="Recommended Calories:" />
-            <TextView
-                android:id="@+id/red_value"
-                android:textSize="30dp"
+                android:id="@+id/DietTitle"
                 android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:text="2000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothic_a1_semibold"
+                android:gravity="center_horizontal"
+                android:paddingVertical="10dp"
+                android:text="My Diet"
+                android:textColor="#FFF2BF"
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/DailyIntake"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="My Daily Calories" />
-
-            <EditText
-                android:id="@+id/real_calories"
-                android:layout_width="wrap_content"
+                android:id="@+id/agetext"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Calorie Amount"
-                android:inputType="number"
-                android:maxLength="6" />
+                android:gravity="center_horizontal"
+                android:text="Must fill out age, gender, height, and weight in profile"
+                android:textColor="@color/white" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rec_calorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:text="Recommended Calories:" />
+
+                <TextView
+                    android:id="@+id/red_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="2000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/DailyIntake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="My Daily Calories" />
+
+                <EditText
+                    android:id="@+id/real_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Calorie Amount"
+                    android:inputType="number"
+                    android:maxLength="6" />
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="fill_parent"
+                android:layout_height="400dp"
+                android:layout_marginBottom="75dp">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/dishfilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_pink"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:subtitle="Suggested Recipes" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="#EC9BFF"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="20dp"
+                                app:srcCompat="@drawable/fast_food" />
+
+                            <LinearLayout
+                                android:layout_width="155dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Dish #1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Ingredients:" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/dash_button"
+                                android:gravity="center"
+                                android:text="Explore"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="#EC9BFF"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="20dp"
+                                app:srcCompat="@drawable/fast_food" />
+
+                            <LinearLayout
+                                android:layout_width="155dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Dish #1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Ingredients:" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/dash_button"
+                                android:gravity="center"
+                                android:text="Explore"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="#EC9BFF"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="20dp"
+                                app:srcCompat="@drawable/fast_food" />
+
+                            <LinearLayout
+                                android:layout_width="155dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Dish #1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Ingredients:" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/dash_button"
+                                android:gravity="center"
+                                android:text="Explore"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="#EC9BFF"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="20dp"
+                                app:srcCompat="@drawable/fast_food" />
+
+                            <LinearLayout
+                                android:layout_width="155dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Dish #1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Ingredients:" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/dash_button"
+                                android:gravity="center"
+                                android:text="Explore"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
 
         </LinearLayout>
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
-            android:layout_width="fill_parent"
-            android:layout_height="400dp">
-
-        </com.github.mikephil.charting.charts.PieChart>
-
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="25dp"
-            android:contentDescription="Recipes"
-            android:src="@drawable/dash_button" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
