@@ -17,7 +17,7 @@ public class recipe_card extends AppCompatActivity {
         RecipeTitle=findViewById(R.id.RecipeTitle);
     }
 
-    private class title_webscrape extends AsyncTask<Void, Void, Void> {
+    private abstract class title_webscrape extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected  void onPreExecute() {
@@ -25,7 +25,7 @@ public class recipe_card extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackgound(Void...voids) {
+        protected Void doInBackground(Void...voids) {
 
 
             return null;
