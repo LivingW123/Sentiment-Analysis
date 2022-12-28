@@ -1,13 +1,17 @@
 package com.example.sentimentanalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -16,7 +20,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.squareup.picasso.Picasso;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -26,11 +35,19 @@ public class DietActivity extends AppCompatActivity {
     PieDataSet pieDataSet;
     ArrayList pieEntries;
     ArrayList PieEntryLabels;
+    TextView RecipeTitle;
+    AppCompatButton RecipeButton;
+    TextView RecipeInfo;
+    ImageView RecipeImage;
     double rec_calories=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
+
+        title_webscrape dw = new title_webscrape();
+        dw.execute();
+
         pieChart = findViewById(R.id.pieChart);
         getEntries(1,1);
 //        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
@@ -123,6 +140,77 @@ public class DietActivity extends AppCompatActivity {
         pieChart.getDescription().setEnabled(false);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
+    }
+
+    private class title_webscrape extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected  void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void...voids) {
+            org.jsoup.nodes.Document document = null;
+            try {
+                document = Jsoup.connect("https://www.allrecipes.com/recipes/17561/lunch/").get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
+//            org.jsoup.select.String links = document.select("comp card--image-top mntl-card-list-items mntl-document-card mntl-card card card--no-image").first().attr("abs:href");
+            org.jsoup.select.Elements images=document.getElementsByClass("card__img universal-image__image lazyloaded");
+
+
+            String title=elements.text();
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    LinearLayout item = (LinearLayout)findViewById(R.id.CardHolder);
+
+                    for (Element image :images){
+                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
+                        RecipeImage=child.findViewById(R.id.RecipeImage);
+
+                        Picasso.get().load(image.absUrl("src")).into(RecipeImage);
+
+                        item.addView(child);
+                        System.out.println("UwU");
+                        System.out.println(image.absUrl("src"));
+                    }
+
+                    for (Element element : elements) {
+                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
+                        RecipeTitle=child.findViewById(R.id.RecipeTitle);
+
+                        RecipeTitle.setText(element.ownText());
+
+                        item.addView(child);
+                        System.out.println(element.ownText());
+                    }
+
+//                    for (Element link : links) {
+//                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
+//                        RecipeButton=child.findViewById(R.id.RecipeButton);
+//
+//
+//                        item.addView(child);
+//                        System.out.println(link.ownText());
+//                    }
+
+                }
+            });
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+
+        }
     }
 }
 
