@@ -160,8 +160,7 @@ public class DietActivity extends AppCompatActivity {
 
             org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
 //            org.jsoup.select.String links = document.select("comp card--image-top mntl-card-list-items mntl-document-card mntl-card card card--no-image").first().attr("abs:href");
-            org.jsoup.select.Elements images=document.getElementsByClass("card__img universal-image__image lazyloaded");
-
+            org.jsoup.select.Elements images=document.select(".card__img");
 
             String title=elements.text();
             runOnUiThread(new Runnable() {
@@ -169,26 +168,15 @@ public class DietActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     LinearLayout item = (LinearLayout)findViewById(R.id.CardHolder);
-
-                    for (Element image :images){
+                    for(int i = 0; i < elements.size(); i++)
+                    {
                         View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
                         RecipeImage=child.findViewById(R.id.RecipeImage);
-
-                        Picasso.get().load(image.absUrl("src")).into(RecipeImage);
-
-                        item.addView(child);
-                        System.out.println("UwU");
-                        System.out.println(image.absUrl("src"));
-                    }
-
-                    for (Element element : elements) {
-                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
+                        Picasso.get().load(images.get(i * 2).attr("data-src")).into(RecipeImage);
                         RecipeTitle=child.findViewById(R.id.RecipeTitle);
 
-                        RecipeTitle.setText(element.ownText());
-
+                        RecipeTitle.setText(elements.get(i).ownText());
                         item.addView(child);
-                        System.out.println(element.ownText());
                     }
 
 //                    for (Element link : links) {
