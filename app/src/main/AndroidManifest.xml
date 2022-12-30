@@ -21,6 +21,9 @@
         android:theme="@style/Theme.SentimentAnalysis.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".music_card"
+            android:exported="false" />
+        <activity
             android:name=".recipe_card"
             android:exported="false" />
         <activity

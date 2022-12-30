@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -159,8 +160,8 @@ public class DietActivity extends AppCompatActivity {
             }
 
             org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
-//            org.jsoup.select.String links = document.select("comp card--image-top mntl-card-list-items mntl-document-card mntl-card card card--no-image").first().attr("abs:href");
-            org.jsoup.select.Elements images=document.select(".card__img");
+            org.jsoup.select.Elements links = document.getElementsByClass("comp card--image-top mntl-card-list-items mntl-document-card mntl-card card card--no-image");
+            org.jsoup.select.Elements images = document.select(".card__img");
 
             String title=elements.text();
             runOnUiThread(new Runnable() {
@@ -171,11 +172,23 @@ public class DietActivity extends AppCompatActivity {
                     for(int i = 0; i < elements.size(); i++)
                     {
                         View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
+
                         RecipeImage=child.findViewById(R.id.RecipeImage);
                         Picasso.get().load(images.get(i * 2).attr("data-src")).into(RecipeImage);
-                        RecipeTitle=child.findViewById(R.id.RecipeTitle);
 
+                        RecipeTitle=child.findViewById(R.id.RecipeTitle);
                         RecipeTitle.setText(elements.get(i).ownText());
+
+                        RecipeButton=child.findViewById(R.id.RecipeButton);
+                        String temp=links.get(i).attr("href");
+                        System.out.println(temp);
+//                        RecipeButton.setOnClickListener(view ->{
+//                            Uri uri = Uri.parse(temp);
+//                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                            startActivity(intent);
+//                        });
+//
+
                         item.addView(child);
                     }
 
