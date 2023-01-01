@@ -159,29 +159,25 @@ public class DietActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
-            org.jsoup.select.Elements links = document.getElementsByClass("comp card--image-top mntl-card-list-items mntl-document-card mntl-card card card--no-image");
-            org.jsoup.select.Elements images = document.select(".card__img");
-
-            String title=elements.text();
+            org.jsoup.select.Elements cards = document.select("a.mntl-card, a.card");
             runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
                     LinearLayout item = (LinearLayout)findViewById(R.id.CardHolder);
-                    for(int i = 0; i < elements.size(); i++)
+                    for(int i = 0; i < cards.size(); i++)
                     {
                         View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
 
                         RecipeImage=child.findViewById(R.id.RecipeImage);
-                        Picasso.get().load(images.get(i * 2).attr("data-src")).into(RecipeImage);
+                        Picasso.get().load(cards.get(i).child(0).child(0).child(0).child(0).attr("data-src")).into(RecipeImage);
 
                         RecipeTitle=child.findViewById(R.id.RecipeTitle);
-                        RecipeTitle.setText(elements.get(i).ownText());
+                        RecipeTitle.setText(cards.get(i).child(1).getElementsByAttributeValue("class", "card__title").text());
 
                         RecipeButton=child.findViewById(R.id.RecipeButton);
-                        String temp=links.get(i).attr("href");
-                        System.out.println(temp);
+                        String link = cards.get(i).attr("href");
+                        System.out.println(link);
 //                        RecipeButton.setOnClickListener(view ->{
 //                            Uri uri = Uri.parse(temp);
 //                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
