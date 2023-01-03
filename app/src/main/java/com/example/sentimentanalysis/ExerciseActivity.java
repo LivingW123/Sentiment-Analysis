@@ -24,8 +24,6 @@ public class ExerciseActivity
         int DailyReset=0;
         Date currentTime = Calendar.getInstance().getTime();
 
-
-
         Spinner spinner = findViewById(R.id.exercise_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.excercise, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

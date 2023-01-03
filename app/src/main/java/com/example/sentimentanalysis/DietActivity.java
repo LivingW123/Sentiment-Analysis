@@ -38,7 +38,12 @@ public class DietActivity extends AppCompatActivity {
     ArrayList PieEntryLabels;
     TextView RecipeTitle;
     AppCompatButton RecipeButton;
-    TextView RecipeInfo;
+    TextView CookTime;
+    TextView Serving;
+    TextView Fat;
+    TextView Carbs;
+    TextView Protein;
+    TextView Calories;
     ImageView RecipeImage;
     double rec_calories=2000;
     @Override
@@ -177,28 +182,42 @@ public class DietActivity extends AppCompatActivity {
 
                         RecipeButton=child.findViewById(R.id.RecipeButton);
                         String link = cards.get(i).attr("href");
-                        System.out.println(link);
-//                        RecipeButton.setOnClickListener(view ->{
-//                            Uri uri = Uri.parse(temp);
-//                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                            startActivity(intent);
-//                        });
-//
+                        RecipeButton.setOnClickListener(view ->{
+                            Uri uri = Uri.parse(link);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+                        });
+
+//                        org.jsoup.nodes.Document dish = null;
+//                        System.out.println(link);
+//                        try {
+//                            dish = Jsoup.connect(link).get();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
+//                        org.jsoup.select.Elements CookTimeJSoup = dish.child(2).getElementsByAttributeValue("class","mntl-recipe-details__item");
+//                        CookTime=child.findViewById(R.id.CookTime);
+//                        CookTime.setText(CookTimeJSoup.text());
+//                        Serving=child.findViewById(R.id.Serving);
+//                        Fat=child.findViewById(R.id.Fat);
+//                        Carbs=child.findViewById(R.id.Carbs);
+//                        Protein=child.findViewById(R.id.Protein);
+//                        Calories=child.findViewById(R.id.Calories);
 
                         item.addView(child);
                     }
-
-//                    for (Element link : links) {
-//                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
-//                        RecipeButton=child.findViewById(R.id.RecipeButton);
-//
-//
-//                        item.addView(child);
-//                        System.out.println(link.ownText());
-//                    }
-
                 }
             });
+
+//            org.jsoup.nodes.Document dish = null;
+//            try {
+//                dish = Jsoup.connect("https://www.allrecipes.com/recipes/17561/lunch/").get();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            org.jsoup.select.Elements cards = document.select("a.mntl-card, a.card");
 
             return null;
         }
