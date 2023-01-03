@@ -187,38 +187,25 @@ public class DietActivity extends AppCompatActivity {
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             startActivity(intent);
                         });
-
-//                        org.jsoup.nodes.Document dish = null;
-//                        System.out.println(link);
-//                        try {
-//                            dish = Jsoup.connect(link).get();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                        org.jsoup.select.Elements elements = document.getElementsByClass("card__title-text");
-//                        org.jsoup.select.Elements CookTimeJSoup = dish.child(2).getElementsByAttributeValue("class","mntl-recipe-details__item");
-//                        CookTime=child.findViewById(R.id.CookTime);
-//                        CookTime.setText(CookTimeJSoup.text());
-//                        Serving=child.findViewById(R.id.Serving);
-//                        Fat=child.findViewById(R.id.Fat);
-//                        Carbs=child.findViewById(R.id.Carbs);
-//                        Protein=child.findViewById(R.id.Protein);
-//                        Calories=child.findViewById(R.id.Calories);
-
+                        Thread thread = new Thread(new Runnable(){
+                            @Override
+                            public void run() {
+                                try {
+                                    org.jsoup.nodes.Document dish = null;
+                                    System.out.println(link);
+                                    org.jsoup.nodes.Document document = Jsoup.connect(link).get();
+                                    CookTime=child.findViewById(R.id.CookTime);
+                                    CookTime.setText("test text");
+                                    //Your code goes here
+                                } catch (Exception e) {
+                                }
+                            }
+                        });
+                        thread.start();
                         item.addView(child);
                     }
                 }
             });
-
-//            org.jsoup.nodes.Document dish = null;
-//            try {
-//                dish = Jsoup.connect("https://www.allrecipes.com/recipes/17561/lunch/").get();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            org.jsoup.select.Elements cards = document.select("a.mntl-card, a.card");
-
             return null;
         }
 
