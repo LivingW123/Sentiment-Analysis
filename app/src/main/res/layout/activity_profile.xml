@@ -76,6 +76,20 @@
                 android:fontFamily="@font/alata"
                 android:text="Edit Profile" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/SentimentIndex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/dash_button"
+                android:fontFamily="@font/gothic_a1_semibold"
+                android:padding="10dp"
+                android:text="Sentiment Index: 50%"
+                android:textColor="#FF7700"
+                android:textSize="17dp" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -38,7 +38,12 @@ public class DietActivity extends AppCompatActivity {
     ArrayList PieEntryLabels;
     TextView RecipeTitle;
     AppCompatButton RecipeButton;
-    TextView RecipeInfo;
+    TextView CookTime;
+    TextView Serving;
+    TextView Fat;
+    TextView Carbs;
+    TextView Protein;
+    TextView Calories;
     ImageView RecipeImage;
     double rec_calories=2000;
     @Override
@@ -177,29 +182,30 @@ public class DietActivity extends AppCompatActivity {
 
                         RecipeButton=child.findViewById(R.id.RecipeButton);
                         String link = cards.get(i).attr("href");
-                        System.out.println(link);
-//                        RecipeButton.setOnClickListener(view ->{
-//                            Uri uri = Uri.parse(temp);
-//                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                            startActivity(intent);
-//                        });
-//
-
+                        RecipeButton.setOnClickListener(view ->{
+                            Uri uri = Uri.parse(link);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+                        });
+                        Thread thread = new Thread(new Runnable(){
+                            @Override
+                            public void run() {
+                                try {
+                                    org.jsoup.nodes.Document dish = null;
+                                    System.out.println(link);
+                                    org.jsoup.nodes.Document document = Jsoup.connect(link).get();
+                                    CookTime=child.findViewById(R.id.CookTime);
+                                    CookTime.setText("test text");
+                                    //Your code goes here
+                                } catch (Exception e) {
+                                }
+                            }
+                        });
+                        thread.start();
                         item.addView(child);
                     }
-
-//                    for (Element link : links) {
-//                        View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
-//                        RecipeButton=child.findViewById(R.id.RecipeButton);
-//
-//
-//                        item.addView(child);
-//                        System.out.println(link.ownText());
-//                    }
-
                 }
             });
-
             return null;
         }
 
