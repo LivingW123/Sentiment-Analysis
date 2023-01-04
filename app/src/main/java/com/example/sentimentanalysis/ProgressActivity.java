@@ -15,6 +15,7 @@ public class ProgressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_progress);
         // on below line we are initializing our graph view.
         graphView = findViewById(R.id.GraphView);
 
@@ -33,21 +34,21 @@ public class ProgressActivity extends AppCompatActivity {
                 new DataPoint(8, 2)
         });
 
-//        // after adding data to our line graph series.
-//        // on below line we are setting
-//        // title for our graph view.
-//        graphView.setTitle("My Graph View");
-//
-//        // on below line we are setting
-//        // text color to our graph view.
-//        graphView.setTitleColor(R.color.teal);
-//
-//        // on below line we are setting
-//        // our title text size.
-//        graphView.setTitleTextSize(18);
-//
-//        //on below line we are adding
-//        //data series to our graph view.
-//        graphView.addSeries(series);
+        // after adding data to our line graph series.
+        // on below line we are setting
+        // title for our graph view.
+        graphView.setTitle("My Graph View");
+
+        // on below line we are setting
+        // text color to our graph view.
+        graphView.setTitleColor(R.color.teal);
+
+        // on below line we are setting
+        // our title text size.
+        graphView.setTitleTextSize(18);
+
+        //on below line we are adding
+        //data series to our graph view.
+        graphView.addSeries(series);
     }
 }
