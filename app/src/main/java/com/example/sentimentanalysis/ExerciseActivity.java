@@ -72,7 +72,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            org.jsoup.select.Elements cards = document2.select("div.cell, div.small-12, div.bp600-6");
+            org.jsoup.select.Elements cards = document2.select("div.cell.small-12.bp600-6");
             System.out.println(cards);
             runOnUiThread(new Runnable() {
 
@@ -83,7 +83,9 @@ public class ExerciseActivity extends AppCompatActivity {
                         View child = getLayoutInflater().inflate(R.layout.activity_workout_card, null);
 
                         WorkoutImage = child.findViewById(R.id.WorkoutImage);
-                        Picasso.get().load(cards.get(i).child(0).child(0).attr("data-src")).into(WorkoutImage);
+                        //System.out.println(cards.get(i).child(1));
+                        System.out.println(cards.get(i).child(1).child(1));
+                        Picasso.get().load(cards.get(i).child(1).child(1).child(0).attr("data-src")).into(WorkoutImage);
 
                         WorkoutTitle = child.findViewById(R.id.WorkoutTitle);
                         WorkoutTitle.setText(cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").text());
