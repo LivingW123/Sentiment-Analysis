@@ -46,7 +46,7 @@ public class DietActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
 
-        title_webscrape dw = new title_webscrape();
+        food_webscrape dw = new food_webscrape();
         dw.execute();
 
         pieChart = findViewById(R.id.pieChart);
@@ -143,7 +143,7 @@ public class DietActivity extends AppCompatActivity {
         l.setEnabled(false);
     }
 
-    private class title_webscrape extends AsyncTask<Void, Void, Void> {
+    private class food_webscrape extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected  void onPreExecute() {
@@ -164,7 +164,7 @@ public class DietActivity extends AppCompatActivity {
 
                 @Override
                 public void run() {
-                    LinearLayout item = (LinearLayout)findViewById(R.id.CardHolder);
+                    LinearLayout item = (LinearLayout)findViewById(R.id.DietCardHolder);
                     for(int i = 0; i < cards.size(); i++)
                     {
                         View child = getLayoutInflater().inflate(R.layout.activity_recipe_card, null);
@@ -178,11 +178,11 @@ public class DietActivity extends AppCompatActivity {
                         RecipeButton=child.findViewById(R.id.RecipeButton);
                         String link = cards.get(i).attr("href");
                         System.out.println(link);
-//                        RecipeButton.setOnClickListener(view ->{
-//                            Uri uri = Uri.parse(temp);
-//                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                            startActivity(intent);
-//                        });
+                        RecipeButton.setOnClickListener(view ->{
+                            Uri uri = Uri.parse(link);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+                        });
 //
 
                         item.addView(child);

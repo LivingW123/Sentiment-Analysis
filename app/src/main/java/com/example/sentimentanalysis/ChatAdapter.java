@@ -62,6 +62,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        //
         Message message = messageArrayList.get(position);
         switch (message.type) {
             case TEXT:

@@ -76,6 +76,14 @@
                 android:fontFamily="@font/alata"
                 android:text="Edit Profile" />
 
+            <TextView
+                android:id="@+id/disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="*All information are collected for identification purposes only*"
+                android:textColor="#FFFFFF" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,11 +108,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:ems="10"
-                    android:tint="@color/background_gradient_end"
-                    android:gravity="right"
                     android:layout_marginLeft="50dp"
-                    android:inputType="textPersonName" />
+                    android:editable="false"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:inputType="textPersonName"
+                    android:tint="@color/background_gradient_end"
+                    tools:ignore="Deprecated" />
 
             </LinearLayout>
 
@@ -131,11 +141,13 @@
                     android:id="@+id/editTextEmailAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:editable="false"
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
                     android:gravity="center"
                     android:layout_marginLeft="50dp"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    tools:ignore="Deprecated" />
             </LinearLayout>
 
             <LinearLayout
@@ -163,6 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:ems="10"
+                    android:editable="false"
                     android:gravity="center"
                     android:layout_marginLeft="50dp"
                     android:inputType="number" />
@@ -192,6 +205,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:editable="false"
                     android:ems="10"
                     android:layout_marginLeft="25dp"
                     android:gravity="center"
@@ -224,6 +238,7 @@
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
                     android:layout_marginLeft="25dp"
+                    android:editable="false"
                     android:gravity="center_horizontal"
                     android:inputType="number" />
             </LinearLayout>
@@ -253,6 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
+                    android:editable="false"
                     android:layout_marginLeft="25dp"
                     android:gravity="center_horizontal"
                     android:inputType="number" />
@@ -284,6 +300,7 @@
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
                     android:gravity="center_horizontal"
+                    android:editable="false"
                     android:layout_marginLeft="25dp"
                     android:inputType="number" />
             </LinearLayout>
@@ -314,11 +331,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="25dp"
                     android:checked="false"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:showText="true"
-                    android:layout_marginLeft="25dp"
                     android:textOff="Female"
                     android:textOn="Male" />
 

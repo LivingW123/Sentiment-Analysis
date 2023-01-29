@@ -76,55 +76,25 @@
                 android:text="Calculate" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/WorkoutFilter"
             android:layout_width="match_parent"
-            android:layout_height="243dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@color/light_pink"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:subtitle="Suggested Recipes" />
 
-            <CheckBox
-                android:id="@+id/exercise_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="I have exercised today :)"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView6"
+            <LinearLayout
+                android:id="@+id/WorkoutCardHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="exercise type-- v same thing below" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </LinearLayout>
+                android:orientation="vertical" />
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

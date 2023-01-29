@@ -118,6 +118,7 @@ public class ChatActivity extends AppCompatActivity {
         if (!this.initialRequest) {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
+            System.out.println(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
         } else {
@@ -125,7 +126,7 @@ public class ChatActivity extends AppCompatActivity {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("100");
             this.initialRequest = false;
-
+            System.out.println(inputmessage);
         }
 
         this.inputMessage.setText("");
@@ -156,6 +157,7 @@ public class ChatActivity extends AppCompatActivity {
                         List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
 
                         for (RuntimeResponseGeneric r : responses) {
+                            //bot message
                             Message outMessage;
                             switch (r.responseType()) {
                                 case "text":

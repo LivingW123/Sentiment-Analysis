@@ -38,6 +38,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -113,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
         //appropriate clicklisteners
         googleBtn.setOnClickListener(view -> signIn());
         signOutBtn.setOnClickListener(view -> signOut());
+
         profileSaveBtn.setOnClickListener(view -> {
 
             //register data from all edittext fields
@@ -130,6 +133,8 @@ public class ProfileActivity extends AppCompatActivity {
                 if (switchState){
                     gender = "m";
                 }
+            ArrayList<Integer> cars = new ArrayList<Integer>();
+            cars.add(0);
 
                 //generate appropriate User obj
                 User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
@@ -142,6 +147,24 @@ public class ProfileActivity extends AppCompatActivity {
                 mDatabaseUser.child(keyId).setValue(u);
                 //key added to email/id hashmap
                 mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
+        });
+
+        EditProfileButton.setOnClickListener(view ->{
+            emailEditText.setEnabled(true);
+            emailEditText.setFocusable(true);
+            nameEditText.setEnabled(true);
+            nameEditText.setFocusable(true);
+            ageEditText.setEnabled(true);
+            ageEditText.setFocusable(true);
+            phone_numberEditText.setEnabled(true);
+            phone_numberEditText.setFocusable(true);
+            heightfeetEditText.setEnabled(true);
+            heightfeetEditText.setFocusable(true);
+            heightinchesEditText.setEnabled(true);
+            heightinchesEditText.setFocusable(true);
+            weightEditText.setEnabled(true);
+            weightEditText.setFocusable(true);
+            genderEditSwitch.setChecked(true);
         });
     }
 
