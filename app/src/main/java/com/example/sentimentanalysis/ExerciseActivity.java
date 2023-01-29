@@ -17,6 +17,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -72,7 +75,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            org.jsoup.select.Elements cards = document2.select("div.cell.small-12.bp600-6");
+            Elements cards = document2.select("div.cell.small-12.bp600-6");
             System.out.println(cards);
             runOnUiThread(new Runnable() {
 
@@ -83,16 +86,15 @@ public class ExerciseActivity extends AppCompatActivity {
                         View child = getLayoutInflater().inflate(R.layout.activity_workout_card, null);
 
                         WorkoutImage = child.findViewById(R.id.WorkoutImage);
-                        //System.out.println(cards.get(i).child(1));
-                        System.out.println(cards.get(i).child(1).child(1));
-                        Picasso.get().load(cards.get(i).child(1).child(1).child(0).attr("data-src")).into(WorkoutImage);
+                        //Node e =cards.get(i).childNode(1);
+                        Picasso.get().load(cards.get(i).childNode(1).childNode(1).childNode(0).attr("data-src")).into(WorkoutImage);
 
                         WorkoutTitle = child.findViewById(R.id.WorkoutTitle);
                         WorkoutTitle.setText(cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").text());
 
                         WorkoutButton = child.findViewById(R.id.WorkoutButton);
                         String link = cards.get(i).attr("href");
-                        System.out.println(link);
+                        //System.out.println(link);
 //                        RecipeButton.setOnClickListener(view ->{
 //                            Uri uri = Uri.parse(temp);
 //                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
