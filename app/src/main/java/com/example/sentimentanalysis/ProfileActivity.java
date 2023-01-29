@@ -78,7 +78,8 @@ public class ProfileActivity extends AppCompatActivity {
         ImageButton ToHome = this.findViewById(R.id.HomeButton);
         ToHome.setOnClickListener(this::onHomeClicked);
 
-
+        Button ToProgress = this.findViewById(R.id.SentimentIndex);
+        ToProgress.setOnClickListener(this::onProgressClicked);
 
         //get firebase database + necessary refs
         database=FirebaseDatabase.getInstance();
@@ -297,6 +298,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void onHomeClicked(View view){
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void onProgressClicked(View view){
+        Intent intent = new Intent(this, ProgressActivity.class);
         startActivity(intent);
     }
 
