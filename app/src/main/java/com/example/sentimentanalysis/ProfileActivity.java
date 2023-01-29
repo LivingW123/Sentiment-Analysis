@@ -138,7 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
             cars.add(0);
 
                 //generate appropriate User obj
-                User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
+                User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight,new ArrayList<Integer>());
 
                 register(email, password);
 

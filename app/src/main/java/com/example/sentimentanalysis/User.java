@@ -1,5 +1,7 @@
 package com.example.sentimentanalysis;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String username;
@@ -11,12 +13,13 @@ public class User {
     private String age;
     private String phonenumber;
     private String gender;
+    private ArrayList<Integer> sentiment;
     private int height;
     private int weight;
 
 
 
-    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches, int weight){
+    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches, int weight, ArrayList<Integer> sentiment){
         this.password=password;
         this.username=email;
         this.name=name;
@@ -25,6 +28,7 @@ public class User {
         this.gender=gender;
         this.height=heightFeet*12+heightInches;
         this.weight=weight;
+        this.sentiment=sentiment;
     }
 
     public String getUsername() {
@@ -95,11 +99,13 @@ public class User {
         this.weight = weight;
     }
 
+    public ArrayList<Integer> getsentiment() {
+        return sentiment;
+    }
 
-
-
-
-
+    public void setsentiment(ArrayList<Integer> sentiment) {
+        this.sentiment = sentiment;
+    }
 
 
 

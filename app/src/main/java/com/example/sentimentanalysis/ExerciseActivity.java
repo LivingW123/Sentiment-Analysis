@@ -65,14 +65,14 @@ public class ExerciseActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void...voids) {
-            org.jsoup.nodes.Document document = null;
+            org.jsoup.nodes.Document document2 = null;
             try {
-                document = Jsoup.connect("https://www.muscleandstrength.com/workouts/home").get();
+                document2 = Jsoup.connect("https://www.muscleandstrength.com/workouts/home").get();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            org.jsoup.select.Elements cards = document.select("div.cell,div.small-12");
+            org.jsoup.select.Elements cards = document2.select("div.cell, div.small-12, div.bp600-6");
             System.out.println(cards);
             runOnUiThread(new Runnable() {
 
