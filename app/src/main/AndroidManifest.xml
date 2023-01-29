@@ -21,14 +21,13 @@
         android:theme="@style/Theme.SentimentAnalysis.NoActionBar"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".StarActivity"
             android:exported="false" />
         <activity
             android:name=".workout_card"
-=======
+            android:exported="false"/>
+        <activity
             android:name=".ProgressActivity"
->>>>>>> 2c89693f7a99a8c050703df84cae5804df32682f
             android:exported="false" />
         <activity
             android:name=".music_card"
