@@ -15,12 +15,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
@@ -33,6 +44,7 @@ import com.ibm.watson.assistant.v2.model.MessageOptions;
 import com.ibm.watson.assistant.v2.model.MessageResponse;
 import com.ibm.watson.assistant.v2.model.SessionResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -46,8 +58,58 @@ public class ChatActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
     private Context mContext;
 
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+    FirebaseDatabase database;
+    DatabaseReference mDatabaseUser, mDatabaseEmail;
+    User user;
+
     private Assistant watsonAssistant;
     private Response<SessionResponse> watsonAssistantSession;
+
+    private void SentimentIndex(){
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
+
+        String UserEmail = act.getEmail();
+        String email =  UserEmail.replaceAll("[.#$]" , ",");
+        mDatabaseEmail.child(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue() != null)
+                {
+                    String UserId = snapshot.getValue().toString();
+                    DatabaseReference userRef= mDatabaseUser.child(UserId);
+                    //second add value event listener tries to retrieve the actual properties of the original user object.
+                    userRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap hm = (HashMap) snapshot.getValue();
+//                            ageEditText.setText("" + hm.get("age"));
+//                            heightfeetEditText.setText("" + ((long)hm.get("height")/12));
+//                            heightinchesEditText.setText("" + ((long)hm.get("height")%12));
+//                            phone_numberEditText.setText("" + hm.get("phonenumber"));
+//                            weightEditText.setText("" + hm.get("weight"));
+//                            genderEditSwitch.setChecked(false);
+//                            if(hm.get("gender").equals("m"))
+//                            {
+//                                genderEditSwitch.setChecked(true);
+//                            }
+//                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            //error msg here
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+
 
     private void createServices() {
         watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
