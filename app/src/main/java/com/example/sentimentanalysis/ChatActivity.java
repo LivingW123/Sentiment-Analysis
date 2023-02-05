@@ -74,25 +74,29 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    void SentimentIndex(){
+    void SentimentIndex() {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
 
         String UserEmail = act.getEmail();
-        String email =  UserEmail.replaceAll("[.#$]" , ",");
+        String email = UserEmail.replaceAll("[.#$]", ",");
         mDatabaseEmail.child(email).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue() != null)
-                {
+                if (snapshot.getValue() != null) {
                     String UserId = snapshot.getValue().toString();
-                    DatabaseReference userRef= mDatabaseUser.child(UserId);
+                    DatabaseReference userRef = mDatabaseUser.child(UserId);
                     //second add value event listener tries to retrieve the actual properties of the original user object.
                     userRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             HashMap hm = (HashMap) snapshot.getValue();
+                            String ScoreStart=inputMessage.getText().toString().trim();
+                            if (ScoreStart.substring(0,52)=="Let's get started. Answer the questions with a range"){
+                                int SentimentScore=0;
+                                score(SentimentScore, ScoreStart);
+                            }
 //                            ageEditText.setText("" + hm.get("age"));
                         }
 
@@ -103,10 +107,36 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //error msg here
+            }
         });
+    }
 
 
-
+    private void score(int sscore, String args){
+        if (args.substring(0,14)=="Fantastic job!"){
+            sscore+=1;
+        }
+        else if (args.substring(0,13)=="That's great!"){
+            sscore+=1;
+        }
+        else if (args.substring(0,15)=="That's alright."){
+            System.out.println(0);
+        }
+        else if (args.substring(0,8)=="Oh no :("){
+            sscore+=1;
+        }
+        else if (args.substring(0,28)=="I'm so sorry to hear that :("){
+            sscore+=1;
+        }
+        else if (args.substring(0,47)=="Thanks for the evaluation! For more information"){
+            System.out.println(sscore);
+            System.out.println("break");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

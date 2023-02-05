@@ -1,4 +1,6 @@
 package com.example.sentimentanalysis;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -93,15 +96,37 @@ public class ExerciseActivity extends AppCompatActivity {
                         WorkoutTitle.setText(cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").text());
 
                         WorkoutButton = child.findViewById(R.id.WorkoutButton);
-                        String link = cards.get(i).attr("href");
-                        //System.out.println(link);
-//                        RecipeButton.setOnClickListener(view ->{
-//                            Uri uri = Uri.parse(temp);
-//                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                            startActivity(intent);
-//                        });
+                        String link = cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").attr("href");
+                        System.out.println(link);
+                        WorkoutButton.setOnClickListener(view ->{
+                            Uri uri = Uri.parse(link);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+                        });
 //
-
+                        Thread thread = new Thread(new Runnable(){
+                            @Override
+                            public void run() {
+                                try {
+                                    org.jsoup.nodes.Document dish = null;
+                                    System.out.println(link);
+                                    org.jsoup.nodes.Document document = Jsoup.connect(link).get();
+                                    WorkoutLevel =child.findViewById(R.id.WorkoutLevel);
+                                    WorkoutLevel.setText("test Text");
+                                    WorkoutGoal=child.findViewById(R.id.WorkoutGoal);
+                                    WorkoutGoal.setText("test text");
+                                    WorkoutType=child.findViewById(R.id.WorkoutType);
+                                    WorkoutType.setText("test text");
+                                    WorkoutEquipment=child.findViewById(R.id.WorkoutEquipment);
+                                    WorkoutEquipment.setText("test text");
+                                    WorkoutLength=child.findViewById(R.id.WorkoutLength);
+                                    WorkoutLength.setText("test text");
+                                    //Your code goes here
+                                } catch (Exception e) {
+                                }
+                            }
+                        });
+                        thread.start();
                         item.addView(child);
                     }
 

@@ -196,7 +196,16 @@ public class DietActivity extends AppCompatActivity {
                                     System.out.println(link);
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     CookTime=child.findViewById(R.id.CookTime);
-                                    CookTime.setText("test text");
+                                    CookTime.setText(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
+                                    System.out.println(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
+                                    Serving=child.findViewById(R.id.Serving);
+                                    Serving.setText("test text");
+                                    Fat=child.findViewById(R.id.Fat);
+                                    Fat.setText("test text");
+                                    Carbs=child.findViewById(R.id.Carbs);
+                                    Carbs.setText("test text");
+                                    Calories=child.findViewById(R.id.Calories);
+                                    Calories.setText("test text");
                                     //Your code goes here
                                 } catch (Exception e) {
                                 }
