@@ -31,7 +31,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
@@ -67,7 +66,15 @@ public class ChatActivity extends AppCompatActivity {
     private Assistant watsonAssistant;
     private Response<SessionResponse> watsonAssistantSession;
 
-    private void SentimentIndex(){
+
+
+    private void createServices() {
+        watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
+        watsonAssistant.setServiceUrl(mContext.getString(R.string.assistant_url));
+    }
+
+
+    void SentimentIndex(){
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
@@ -87,16 +94,7 @@ public class ChatActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             HashMap hm = (HashMap) snapshot.getValue();
 //                            ageEditText.setText("" + hm.get("age"));
-//                            heightfeetEditText.setText("" + ((long)hm.get("height")/12));
-//                            heightinchesEditText.setText("" + ((long)hm.get("height")%12));
-//                            phone_numberEditText.setText("" + hm.get("phonenumber"));
-//                            weightEditText.setText("" + hm.get("weight"));
-//                            genderEditSwitch.setChecked(false);
-//                            if(hm.get("gender").equals("m"))
-//                            {
-//                                genderEditSwitch.setChecked(true);
-//                            }
-//                        }
+                        }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -105,16 +103,10 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 }
             }
-
-        }
-
+        });
 
 
 
-    private void createServices() {
-        watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
-        watsonAssistant.setServiceUrl(mContext.getString(R.string.assistant_url));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
