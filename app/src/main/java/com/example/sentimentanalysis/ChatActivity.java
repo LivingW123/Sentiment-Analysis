@@ -57,6 +57,12 @@ public class ChatActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
     private Context mContext;
 
+    private Boolean chatInitiated = false;
+    private int localSentimentScore=0;
+
+    private static final String USER_DATA="user";
+    private static final String USER_MAP="emailtoUid";
+
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     FirebaseDatabase database;
@@ -74,7 +80,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    void SentimentIndex() {
+    private void SentimentIndex(String Index) {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
@@ -92,10 +98,14 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             HashMap hm = (HashMap) snapshot.getValue();
-                            String ScoreStart=inputMessage.getText().toString().trim();
-                            if (ScoreStart.substring(0,52)=="Let's get started. Answer the questions with a range"){
-                                int SentimentScore=0;
-                                score(SentimentScore, ScoreStart);
+                            String ScoreStart=Index.trim();
+                            if (!chatInitiated && ScoreStart.contains("Let's get started. Answer the questions with a range")){
+                                chatInitiated=true;
+                                localSentimentScore=0;
+                            }
+                            else{
+                                localSentimentScore+=score(ScoreStart);
+                                System.out.println("SCORE"+localSentimentScore);
                             }
 //                            ageEditText.setText("" + hm.get("age"));
                         }
@@ -116,32 +126,36 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void score(int sscore, String args){
-        if (args.substring(0,14)=="Fantastic job!"){
-            sscore+=1;
+    private int score(String msg){
+        if (msg.contains("Fantastic job!")){
+            return 2;
         }
-        else if (args.substring(0,13)=="That's great!"){
-            sscore+=1;
+        else if (msg.contains("That's great!")){
+            return 1;
         }
-        else if (args.substring(0,15)=="That's alright."){
-            System.out.println(0);
+        else if (msg.contains("That's alright.")){
+            return 0;
         }
-        else if (args.substring(0,8)=="Oh no :("){
-            sscore+=1;
+        else if (msg.contains("Oh no :(")){
+            return -1;
         }
-        else if (args.substring(0,28)=="I'm so sorry to hear that :("){
-            sscore+=1;
+        else if (msg.contains("I'm so sorry to hear that :(")){
+            return -2;
         }
-        else if (args.substring(0,47)=="Thanks for the evaluation! For more information"){
-            System.out.println(sscore);
-            System.out.println("break");
+        else if (msg.contains("Thanks for the evaluation! For more information")){
+            System.out.println("done");
         }
+        return 0;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        database=FirebaseDatabase.getInstance();
+        mDatabaseUser=database.getReference(USER_DATA);
+        mDatabaseEmail=database.getReference(USER_MAP);
 
         mContext = getApplicationContext();
 
@@ -202,7 +216,6 @@ public class ChatActivity extends AppCompatActivity {
         if (!this.initialRequest) {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
-            System.out.println(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
         } else {
@@ -210,7 +223,6 @@ public class ChatActivity extends AppCompatActivity {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("100");
             this.initialRequest = false;
-            System.out.println(inputmessage);
         }
 
         this.inputMessage.setText("");
@@ -248,7 +260,7 @@ public class ChatActivity extends AppCompatActivity {
                                     outMessage = new Message();
                                     outMessage.setMessage(r.text());
                                     outMessage.setId("2");
-
+                                    SentimentIndex(outMessage.getMessage());
                                     messageArrayList.add(outMessage);
                                     break;
 
