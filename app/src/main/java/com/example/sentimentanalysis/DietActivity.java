@@ -25,7 +25,6 @@ import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -183,7 +182,7 @@ public class DietActivity extends AppCompatActivity {
 
                         RecipeButton=child.findViewById(R.id.RecipeButton);
                         String link = cards.get(i).attr("href");
-                        System.out.println(link);
+                        //System.out.println(link);
                         RecipeButton.setOnClickListener(view ->{
                             Uri uri = Uri.parse(link);
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -194,12 +193,27 @@ public class DietActivity extends AppCompatActivity {
                             public void run() {
                                 try {
                                     org.jsoup.nodes.Document dish = null;
-                                    System.out.println(link);
+                                    //System.out.println(link);
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     CookTime=child.findViewById(R.id.CookTime);
-                                    Elements temp=document.getElementsByAttributeValue("class","mntl-recipe-details__content");
-                                    System.out.println(temp);
-                                    CookTime.setText(temp.text());
+                                    String s = document.getElementsByAttributeValue("class","mntl-recipe-details__content").text();
+                                    //System.out.println(s);
+                                    if(s.contains("Total Time:"))
+                                    {
+                                        //System.out.println("contains!");
+
+                                        s = s.substring(s.indexOf("Total Time:") + 11);
+                                        if(s.contains("mins")) {
+                                            int minsIndex = s.indexOf("mins") + 4;
+                                            s = s.substring(0, minsIndex);
+                                        }
+                                        else{
+                                                int hrsIndex = s.indexOf("hrs")+ 3;
+                                                s = s.substring(0, hrsIndex);}
+                                        System.out.println("s is" + s);
+                                    }
+                                    CookTime.setText(s);
+                                    //System.out.println(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
                                     Serving=child.findViewById(R.id.Serving);
                                     Serving.setText("test text");
                                     Fat=child.findViewById(R.id.Fat);
@@ -228,4 +242,3 @@ public class DietActivity extends AppCompatActivity {
         }
     }
 }
-
