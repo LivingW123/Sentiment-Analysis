@@ -79,7 +79,7 @@ public class ExerciseActivity extends AppCompatActivity {
             }
 
             Elements cards = document2.select("div.cell.small-12.bp600-6");
-            System.out.println(cards);
+            //System.out.println(cards);
             runOnUiThread(new Runnable() {
 
                 @Override
@@ -96,11 +96,10 @@ public class ExerciseActivity extends AppCompatActivity {
                         WorkoutTitle.setText(cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").text());
 
                         WorkoutButton = child.findViewById(R.id.WorkoutButton);
-                        String link = cards.get(i).child(1).getElementsByAttributeValue("class", "node-title").attr("href");
-                        System.out.println(link);
+                        String link = cards.get(i).childNode(3).childNode(1).attr("href");
                         WorkoutButton.setOnClickListener(view ->{
-                            Uri uri = Uri.parse(link);
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse("https://www.muscleandstrength.com" + link));
                             startActivity(intent);
                         });
 //
@@ -109,7 +108,7 @@ public class ExerciseActivity extends AppCompatActivity {
                             public void run() {
                                 try {
                                     org.jsoup.nodes.Document dish = null;
-                                    System.out.println(link);
+                                    //.println(link);
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     WorkoutLevel =child.findViewById(R.id.WorkoutLevel);
                                     WorkoutLevel.setText("test Text");
