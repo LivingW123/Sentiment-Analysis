@@ -108,6 +108,7 @@ public class ChatActivity extends AppCompatActivity {
                                 System.out.println("SCORE"+localSentimentScore);
                             }
 //                            ageEditText.setText("" + hm.get("age"));
+
                         }
 
                         @Override
@@ -124,6 +125,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     private int score(String msg){

@@ -110,12 +110,14 @@ public class ExerciseActivity extends AppCompatActivity {
                                     org.jsoup.nodes.Document dish = null;
                                     //.println(link);
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
-                                    WorkoutLevel =child.findViewById(R.id.WorkoutLevel);
-                                    WorkoutLevel.setText("test Text");
+                                    String p=document.getElementsByAttributeValue("class","field-item even").text();
+                                    System.out.println("p is"+p);
                                     WorkoutGoal=child.findViewById(R.id.WorkoutGoal);
                                     WorkoutGoal.setText("test text");
                                     WorkoutType=child.findViewById(R.id.WorkoutType);
                                     WorkoutType.setText("test text");
+                                    WorkoutLevel =child.findViewById(R.id.WorkoutLevel);
+                                    WorkoutLevel.setText("test Text");
                                     WorkoutEquipment=child.findViewById(R.id.WorkoutEquipment);
                                     WorkoutEquipment.setText("test text");
                                     WorkoutLength=child.findViewById(R.id.WorkoutLength);

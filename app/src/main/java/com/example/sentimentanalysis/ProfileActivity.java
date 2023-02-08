@@ -150,23 +150,23 @@ public class ProfileActivity extends AppCompatActivity {
                 mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
         });
 
-        EditProfileButton.setOnClickListener(view ->{
-            emailEditText.setEnabled(true);
-            emailEditText.setFocusable(true);
-            nameEditText.setEnabled(true);
-            nameEditText.setFocusable(true);
-            ageEditText.setEnabled(true);
-            ageEditText.setFocusable(true);
-            phone_numberEditText.setEnabled(true);
-            phone_numberEditText.setFocusable(true);
-            heightfeetEditText.setEnabled(true);
-            heightfeetEditText.setFocusable(true);
-            heightinchesEditText.setEnabled(true);
-            heightinchesEditText.setFocusable(true);
-            weightEditText.setEnabled(true);
-            weightEditText.setFocusable(true);
-            genderEditSwitch.setChecked(true);
-        });
+//        EditProfileButton.setOnClickListener(view ->{
+//            emailEditText.setEnabled(true);
+//            emailEditText.setFocusable(true);
+//            nameEditText.setEnabled(true);
+//            nameEditText.setFocusable(true);
+//            ageEditText.setEnabled(true);
+//            ageEditText.setFocusable(true);
+//            phone_numberEditText.setEnabled(true);
+//            phone_numberEditText.setFocusable(true);
+//            heightfeetEditText.setEnabled(true);
+//            heightfeetEditText.setFocusable(true);
+//            heightinchesEditText.setEnabled(true);
+//            heightinchesEditText.setFocusable(true);
+//            weightEditText.setEnabled(true);
+//            weightEditText.setFocusable(true);
+//            genderEditSwitch.setChecked(true);
+//        });
     }
 
     void fillUserInfo(GoogleSignInAccount act){

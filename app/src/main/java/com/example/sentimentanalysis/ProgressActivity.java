@@ -37,7 +37,7 @@ public class ProgressActivity extends AppCompatActivity {
         // after adding data to our line graph series.
         // on below line we are setting
         // title for our graph view.
-        graphView.setTitle("My Graph View");
+        graphView.setTitle("Sentiment Score");
 
         // on below line we are setting
         // text color to our graph view.
@@ -45,7 +45,7 @@ public class ProgressActivity extends AppCompatActivity {
 
         // on below line we are setting
         // our title text size.
-        graphView.setTitleTextSize(18);
+        graphView.setTitleTextSize(25);
 
         //on below line we are adding
         //data series to our graph view.

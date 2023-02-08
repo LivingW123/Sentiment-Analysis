@@ -197,32 +197,43 @@ public class DietActivity extends AppCompatActivity {
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     CookTime=child.findViewById(R.id.CookTime);
                                     String s = document.getElementsByAttributeValue("class","mntl-recipe-details__content").text();
-                                    //System.out.println(s);
+                                    String m="";
+                                    String n="";
+                                    System.out.println("s is"+s);
                                     if(s.contains("Total Time:"))
                                     {
                                         //System.out.println("contains!");
 
-                                        s = s.substring(s.indexOf("Total Time:") + 11);
-                                        if(s.contains("mins")) {
-                                            int minsIndex = s.indexOf("mins") + 4;
-                                            s = s.substring(0, minsIndex);
+                                        m = s.substring(s.indexOf("Total Time:") + 11);
+                                        if(m.contains("mins")) {
+                                            int minsIndex = m.indexOf("mins") + 4;
+                                            m = m.substring(0, minsIndex);
                                         }
                                         else{
-                                                int hrsIndex = s.indexOf("hrs")+ 3;
-                                                s = s.substring(0, hrsIndex);}
-                                        System.out.println("s is" + s);
+                                                int hrsIndex = m.indexOf("hrs")+ 3;
+                                                m = m.substring(0, hrsIndex);}
+                                        System.out.println("m is" + m);
                                     }
-                                    CookTime.setText(s);
-                                    //System.out.println(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
+                                    CookTime.setText(m);
                                     Serving=child.findViewById(R.id.Serving);
-                                    Serving.setText("test text");
-                                    Fat=child.findViewById(R.id.Fat);
-                                    Fat.setText("test text");
-                                    Carbs=child.findViewById(R.id.Carbs);
-                                    Carbs.setText("test text");
+                                    if (s.contains("Servings:")){
+                                        n = s.substring(s.indexOf("Servings:") + 9);
+                                        if(n.contains("Yield:")) {
+                                            int minsIndex = n.indexOf("Yield:");
+                                            n = n.substring(0, minsIndex);
+                                        }
+                                    }
+                                    Serving.setText(n);
+                                    String x = document.getElementsByAttributeValue("class","mntl-nutrition-facts-summary__table-row").text();
+                                    System.out.println("x is"+x);
                                     Calories=child.findViewById(R.id.Calories);
-                                    Calories.setText("test text");
-                                    //Your code goes here
+                                    Calories.setText(x.substring(0,x.indexOf("Calories")));
+                                    Fat=child.findViewById(R.id.Fat);
+                                    Fat.setText(x.substring(x.indexOf("Calories")+8,x.indexOf("Fat")));
+                                    Carbs=child.findViewById(R.id.Carbs);
+                                    Carbs.setText(x.substring(x.indexOf("Fat")+3,x.indexOf("Carbs")));
+                                    Protein=child.findViewById(R.id.Protein);
+                                    Protein.setText(x.substring(x.indexOf("Carbs")+5,x.indexOf("Protein")));
                                 } catch (Exception e) {
                                 }
                             }
