@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -196,8 +197,9 @@ public class DietActivity extends AppCompatActivity {
                                     System.out.println(link);
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     CookTime=child.findViewById(R.id.CookTime);
-                                    CookTime.setText(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
-                                    System.out.println(document.getElementsByAttributeValue("class","mntl-recipe-details__content").text());
+                                    Elements temp=document.getElementsByAttributeValue("class","mntl-recipe-details__content");
+                                    System.out.println(temp);
+                                    CookTime.setText(temp.text());
                                     Serving=child.findViewById(R.id.Serving);
                                     Serving.setText("test text");
                                     Fat=child.findViewById(R.id.Fat);
