@@ -109,19 +109,19 @@ public class ExerciseActivity extends AppCompatActivity {
                                 try {
                                     org.jsoup.nodes.Document dish = null;
                                     //.println(link);
-                                    org.jsoup.nodes.Document document = Jsoup.connect(link).get();
-                                    String p=document.getElementsByAttributeValue("class","field-item even").text();
+                                    org.jsoup.nodes.Document document = Jsoup.connect("https://www.muscleandstrength.com"+link).get();
+                                    String p=document.getElementsByAttributeValue("class","node-stats-block").text();
                                     System.out.println("p is"+p);
                                     WorkoutGoal=child.findViewById(R.id.WorkoutGoal);
-                                    WorkoutGoal.setText("test text");
+                                    WorkoutGoal.setText(p.substring(p.indexOf("Goal")+4,p.indexOf("Workout Type")));
                                     WorkoutType=child.findViewById(R.id.WorkoutType);
-                                    WorkoutType.setText("test text");
+                                    WorkoutType.setText(p.substring(p.indexOf("Type")+4,p.indexOf("Training Level")));
                                     WorkoutLevel =child.findViewById(R.id.WorkoutLevel);
-                                    WorkoutLevel.setText("test Text");
-                                    WorkoutEquipment=child.findViewById(R.id.WorkoutEquipment);
-                                    WorkoutEquipment.setText("test text");
+                                    WorkoutLevel.setText(p.substring(p.indexOf("Training Level")+14,p.indexOf("Program")));
                                     WorkoutLength=child.findViewById(R.id.WorkoutLength);
-                                    WorkoutLength.setText("test text");
+                                    WorkoutLength.setText(p.substring(p.indexOf("Time Per Workout")+16,p.indexOf("Equipment")));
+                                    WorkoutEquipment=child.findViewById(R.id.WorkoutEquipment);
+                                    WorkoutEquipment.setText(p.substring(p.indexOf("Required")+8,p.indexOf("Target Gender")));
                                     //Your code goes here
                                 } catch (Exception e) {
                                 }

@@ -197,8 +197,8 @@ public class DietActivity extends AppCompatActivity {
                                     org.jsoup.nodes.Document document = Jsoup.connect(link).get();
                                     CookTime=child.findViewById(R.id.CookTime);
                                     String s = document.getElementsByAttributeValue("class","mntl-recipe-details__content").text();
-                                    String m="";
-                                    String n="";
+                                    String m="N/A";
+                                    String n="N/A";
                                     System.out.println("s is"+s);
                                     if(s.contains("Total Time:"))
                                     {

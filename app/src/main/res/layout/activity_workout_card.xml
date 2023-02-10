@@ -34,42 +34,108 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/WorkoutTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="WorkoutTitle" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/WorkoutLevel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Difficulty:" />
+                    <TextView
+                        android:id="@+id/WorkoutTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="WorkoutTitle" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/WorkoutGoal"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Goal:" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/WorkoutType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Type:" />
+                    <TextView
+                        android:id="@+id/WorkoutLevelText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Difficulty: " />
 
-                <TextView
-                    android:id="@+id/WorkoutEquipment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Equipment:" />
+                    <TextView
+                        android:id="@+id/WorkoutLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/WorkoutLength"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Time:" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/WorkoutGoalText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Goal: " />
+
+                    <TextView
+                        android:id="@+id/WorkoutGoal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/WorkoutTypeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type: " />
+
+                    <TextView
+                        android:id="@+id/WorkoutType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/WorkoutTitlEquipmentText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Equipment: " />
+
+                    <TextView
+                        android:id="@+id/WorkoutEquipment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/WorkoutLengthText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time: " />
+
+                    <TextView
+                        android:id="@+id/WorkoutLength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

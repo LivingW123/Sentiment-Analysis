@@ -47,8 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private static final String USER_DATA="user";
-    private static final String USER_MAP="emailtoUid";
+    private static final int DEFAULT = 50;
     public static final String EXTRA_MESSAGE = "com.example.Sentiment-Analysis.MESSAGE";
 
     GoogleSignInOptions gso;
@@ -69,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText heightinchesEditText;
     EditText weightEditText;
     Switch genderEditSwitch;
+    ArrayList<Long> currentHist = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         //get firebase database + necessary refs
         database=FirebaseDatabase.getInstance();
-        mDatabaseUser=database.getReference(USER_DATA);
-        mDatabaseEmail=database.getReference(USER_MAP);
+        mDatabaseUser=database.getReference(getString(R.string.USER_DATA));
+        mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
 
         //connect to ui elems
         EditProfileButton = this.findViewById(R.id.EditProfileButton);
@@ -138,7 +138,17 @@ public class ProfileActivity extends AppCompatActivity {
             cars.add(0);
 
                 //generate appropriate User obj
-                User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight,new ArrayList<Integer>());
+                User u = new User(email, password, name, age, phoneNumber, gender, heightFeet, heightInches, weight);
+                if(currentHist != null)
+                {
+                    for(Long l: currentHist)
+                    {
+                        u.addScore(l.intValue());
+                    }
+                }
+                else {
+                    u.addScore(DEFAULT);
+                }
 
                 register(email, password);
 
@@ -204,6 +214,7 @@ public class ProfileActivity extends AppCompatActivity {
                             {
                                 genderEditSwitch.setChecked(true);
                             }
+                            currentHist = (ArrayList<Long>) hm.get("sentiment");
                         }
 
                         @Override

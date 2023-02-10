@@ -19,7 +19,7 @@ public class User {
 
 
 
-    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches, int weight, ArrayList<Integer> sentiment){
+    public User (String email, String password, String name, String age, String phonenumber, String gender, int heightFeet, int heightInches, int weight){
         this.password=password;
         this.username=email;
         this.name=name;
@@ -28,7 +28,7 @@ public class User {
         this.gender=gender;
         this.height=heightFeet*12+heightInches;
         this.weight=weight;
-        this.sentiment=sentiment;
+        this.sentiment=new ArrayList<Integer>();
     }
 
     public String getUsername() {
@@ -103,8 +103,8 @@ public class User {
         return sentiment;
     }
 
-    public void setsentiment(ArrayList<Integer> sentiment) {
-        this.sentiment = sentiment;
+    public void addScore(int i) {
+        this.sentiment.add(i);
     }
 
 
