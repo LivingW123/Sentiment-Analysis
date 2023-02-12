@@ -2,6 +2,7 @@ package com.example.sentimentanalysis;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -146,6 +147,12 @@ public class ChatActivity extends AppCompatActivity {
         }
         else if (msg.contains("Thanks for the evaluation! For more information")){
             System.out.println("done");
+            Class activityClass = ChatActivity.class;  // This could be passed in as a variable.
+
+            Intent i;
+            i = new Intent(ChatActivity.this, activityClass);
+            i.putExtra("var1", localSentimentScore);
+            startActivity(i);
         }
         return 0;
     }
