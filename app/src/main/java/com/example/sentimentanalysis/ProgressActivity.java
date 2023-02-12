@@ -86,21 +86,13 @@ public class ProgressActivity extends AppCompatActivity {
 
         // on below line we are adding data to our graph view.
 
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        ArrayList<Object> hist = (ArrayList<Object>) args.getSerializable("ARRAYLIST");
+        LineGraphSeries<DataPoint> series;
 
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
-                // on below line we are adding
-                // each point on our x and y axis.
-                new DataPoint(0, 1),
-                new DataPoint(1, 3),
-                new DataPoint(2, 4),
-                new DataPoint(3, 9),
-                new DataPoint(4, 6),
-                new DataPoint(5, 3),
-                new DataPoint(6, 6),
-                new DataPoint(7, 1),
-                new DataPoint(8, 2)
-        });
+
 
         // after adding data to our line graph series.
         // on below line we are setting
@@ -115,8 +107,18 @@ public class ProgressActivity extends AppCompatActivity {
         // our title text size.
         graphView.setTitleTextSize(25);
 
-        //on below line we are adding
-        //data series to our graph view.
-        graphView.addSeries(series);
+        if (hist.size()>0){
+            DataPoint[] dataPoints = new DataPoint[hist.size()]; // declare an array of DataPoint objects with the same size as your list
+            for (int i = 0; i < hist.size(); i++) {
+                // add new DataPoint object to the array for each of your list entries
+                dataPoints[i] = new DataPoint(i, (long) hist.get(i)); // not sure but I think the second argument should be of type double
+            }
+
+            series = new LineGraphSeries<DataPoint>(dataPoints); // This one should be obvious right? :)
+            // on below line we are adding
+            //data series to our graph view.
+            graphView.addSeries(series);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.sentimentanalysis;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -21,6 +22,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -28,6 +38,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class DietActivity extends AppCompatActivity {
@@ -46,6 +57,11 @@ public class DietActivity extends AppCompatActivity {
     TextView Calories;
     ImageView RecipeImage;
     double rec_calories=2000;
+    int weight;
+    int height;
+    int age;
+    int rec_rounded;
+    String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,21 +86,73 @@ public class DietActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.agetext);
         textView.setText(message);
 
+        GoogleSignInOptions gso;
+        GoogleSignInClient gsc;
+        FirebaseDatabase database;
+        DatabaseReference mDatabaseUser, mDatabaseEmail;
+        User user;
 
-        TextView smth =findViewById(R.id.red_value);
-        int weight = 100;
-        int height = 150;
-        int age = 12;
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
 
-        String gender = "m";
-        if (gender=="m"){
-            rec_calories=13.75*weight+5*height-6.76*age+66;
+
+
+        if(act != null){
+            String email = act.getEmail();
+            database=FirebaseDatabase.getInstance();
+            mDatabaseUser=database.getReference(getString(R.string.USER_DATA));
+            mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
+            mDatabaseEmail.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    HashMap hm = (HashMap) snapshot.getValue();
+                    String id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
+                    mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap hm3 = (HashMap) snapshot.getValue();
+                            System.out.println(hm3.get(id));
+                            weight = ((Long)((HashMap) hm3.get(id)).get("weight")).intValue();
+                            height = ((Long)((HashMap) hm3.get(id)).get("height")).intValue();
+                            System.out.println(height);
+                            age=Integer.parseInt((String)((HashMap) hm3.get(id)).get("age"));
+
+                            TextView smth =findViewById(R.id.red_value);
+
+                            gender=((String)((HashMap) hm3.get(id)).get("gender"));
+                            System.out.println(gender);
+                            if (gender.equals("m")){
+                                rec_calories=(13.75*weight)+(5.003*height)-(6.75*age)+66.5;
+                            }
+                            else{
+                                rec_calories=9.563*weight+1.85*height-4.676*age+655.1;
+                            }
+                            rec_rounded = (int)Math.round(rec_calories);
+                            smth.setText(""+rec_rounded);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
-        else{
-            rec_calories=9.56*weight+1.85*height-4.68*age+655;
-        }
-        int rec_rounded = (int)Math.round(rec_calories);
-        smth.setText(""+rec_rounded);
+
+
+
+
+
+
+
+
         int act_calories = 0;
 
         EditText real_calories = findViewById(R.id.real_calories);

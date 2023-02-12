@@ -43,6 +43,8 @@ import com.ibm.watson.assistant.v2.model.MessageInput;
 import com.ibm.watson.assistant.v2.model.MessageOptions;
 import com.ibm.watson.assistant.v2.model.MessageResponse;
 import com.ibm.watson.assistant.v2.model.SessionResponse;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,8 @@ public class ChatActivity extends AppCompatActivity {
     private boolean initialRequest;
     private static String TAG = "MainActivity";
     private Context mContext;
+
+    private ArrayList<Long> hist;
 
     private Boolean chatInitiated = false;
     private int localSentimentScore=0;
@@ -85,6 +89,37 @@ public class ChatActivity extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
+
+        if(act != null){
+            String email = act.getEmail();
+            database=FirebaseDatabase.getInstance();
+            mDatabaseUser=database.getReference(getString(R.string.USER_DATA));
+            mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
+            mDatabaseEmail.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    HashMap hm = (HashMap) snapshot.getValue();
+                    String id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
+                    mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap hm2 = (HashMap) snapshot.getValue();
+                            hist = ((ArrayList<Long>)((HashMap) hm2.get(id)).get("sentiment"));
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
 
         String UserEmail = act.getEmail();
         String email = UserEmail.replaceAll("[.#$]", ",");
@@ -147,11 +182,14 @@ public class ChatActivity extends AppCompatActivity {
         }
         else if (msg.contains("Thanks for the evaluation! For more information")){
             System.out.println("done");
-            Class activityClass = ChatActivity.class;  // This could be passed in as a variable.
+            hist.add((long) localSentimentScore);
+            System.out.println(hist);
 
             Intent i;
-            i = new Intent(ChatActivity.this, activityClass);
-            i.putExtra("var1", localSentimentScore);
+            i = new Intent(ChatActivity.this, ProgressActivity.class);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable)hist);
+            i.putExtra("BUNDLE",args);
             startActivity(i);
         }
         return 0;
