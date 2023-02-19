@@ -3,12 +3,12 @@ package com.example.sentimentanalysis;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,18 +19,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,14 +43,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
         Button ToChat = this.findViewById(R.id.ButtonChat);
         ToChat.setOnClickListener(this::onChatClicked);
+        LinearLayout ChatCard = this.findViewById(R.id.ChatSelection);
 
         Button ToDiet = this.findViewById(R.id.ButtonDiet);
         ToDiet.setOnClickListener(this::onDietClicked);
 
-        Button ToExercise = this.findViewById(R.id.ButtonExercise);
+
+        Intent intent = getIntent();
+        int args = intent.getIntExtra("DietColor",0);
+        LinearLayout DietCard = this.findViewById(R.id.DietSelection);
+        if (args==1){
+            DietCard.setBackgroundColor(getResources().getColor(R.color.light_green));
+        }
+        else{
+            DietCard.setBackgroundColor(getResources().getColor(R.color.light_pink));
+        }
+
+        Button ToExercise = this.findViewById(R.id.SubmitCal);
         ToExercise.setOnClickListener(this::onExerciseClicked);
+        LinearLayout ExerciseCard = this.findViewById(R.id.ExerciseSelection);
+
 
         GoogleSignInOptions gso;
         GoogleSignInClient gsc;
@@ -104,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        Button ToMusic = this.findViewById(R.id.ButtonMusic);
 //        ToMusic.setOnClickListener(this::onMusicClicked);
+
+        Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        Animation animSlideInLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_left);
+        Animation animSlideInRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_right);
+        ChatCard.startAnimation(animFadeIn);
+        ChatCard.startAnimation(animSlideInLeft);
+        ExerciseCard.startAnimation(animFadeIn);
+        ExerciseCard.startAnimation(animSlideInRight);
+        DietCard.startAnimation(animFadeIn);
+        DietCard.startAnimation(animSlideInLeft);
     }
 
     @Override
@@ -140,16 +162,19 @@ public class MainActivity extends AppCompatActivity {
     private void onChatClicked(View view){
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
+//        overridePendingTransition(R.anim.card_flip_left_in, R.anim.card_flip_right_in);
     }
 
     private void onDietClicked(View view){
         Intent intent = new Intent(this, DietActivity.class);
         startActivity(intent);
+//        overridePendingTransition(R.anim.card_flip_right_in, R.anim.card_flip_left_in);
     }
 
     private void onExerciseClicked(View view){
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
+//        overridePendingTransition(R.anim.card_flip_left_in, R.anim.card_flip_right_in);
     }
 
 //    private void onMusicClicked(View view){

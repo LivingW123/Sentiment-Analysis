@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +38,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -61,11 +63,14 @@ public class DietActivity extends AppCompatActivity {
     int height;
     int age;
     int rec_rounded;
+    int prop2;
     String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
+        Button Submit = this.findViewById(R.id.SubmitCal);
+        Submit.setOnClickListener(this::onSubClicked);
 
         food_webscrape dw = new food_webscrape();
         dw.execute();
@@ -96,7 +101,11 @@ public class DietActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
 
-
+//        Intent i;
+//        i = new Intent(DietActivity.this, MainActivity.class);
+//        int args = 0;
+//        i.putExtra("DietColor",args);
+//        startActivity(i);
 
         if(act != null){
             String email = act.getEmail();
@@ -194,7 +203,8 @@ public class DietActivity extends AppCompatActivity {
     }
     private void getEntries(int one, int two) {
         int prop1 = one;
-        int prop2 = (two-one);
+        prop2 = (two-one);
+
 
 
         pieEntries = new ArrayList<>();
@@ -214,6 +224,23 @@ public class DietActivity extends AppCompatActivity {
         pieChart.getDescription().setEnabled(false);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
+    }
+
+
+    private void onSubClicked(View view){
+        Intent i;
+        i = new Intent(DietActivity.this, MainActivity.class);
+        int args;
+
+        if (prop2==0){
+            args = 1;
+        }
+        else{
+            args = 0;
+        }
+
+        i.putExtra("DietColor",args);
+        startActivity(i);
     }
 
     private class food_webscrape extends AsyncTask<Void, Void, Void> {

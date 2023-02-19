@@ -124,11 +124,12 @@
                         android:id="@+id/ButtonChat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send Text!"
+                        android:layout_margin="5dp"
+                        android:hapticFeedbackEnabled="true"
                         android:background="@drawable/dash_button"
                         android:fontFamily="@font/gothic_a1_semibold"
-                        android:layout_margin="5dp"
-                        android:textSize="13dp"/>
+                        android:text="Send Text!"
+                        android:textSize="13dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -201,10 +202,11 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/ButtonExercise"
+                        android:id="@+id/SubmitCal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:hapticFeedbackEnabled="true"
                         android:background="@drawable/dash_button"
                         android:fontFamily="@font/gothic_a1_semibold"
                         android:text="Work out!"
@@ -362,6 +364,7 @@
                         android:id="@+id/ButtonDiet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hapticFeedbackEnabled="true"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/dash_button"
                         android:text="Grab a meal!"

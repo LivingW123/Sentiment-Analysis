@@ -65,17 +65,6 @@
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/EditProfileButton"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/yroundcorner"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
-                android:fontFamily="@font/alata"
-                android:text="Edit Profile" />
-
 
             <TextView
                 android:id="@+id/disclaimer"
@@ -93,8 +82,8 @@
                 android:background="@drawable/dash_button"
                 android:fontFamily="@font/gothic_a1_semibold"
                 android:padding="10dp"
-                android:text="Sentiment Index: 50%"
-                android:textColor="#FF7700"
+                android:text="Sentiment Index"
+                android:textColor="#FF6600"
                 android:textSize="17dp" />
 
             <LinearLayout
@@ -354,14 +343,17 @@
 
             </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/profilesave"
                 android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/yroundcorner"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/dash_button"
-                android:text="Save Profile" />
+                android:paddingHorizontal="15dp"
+                android:fontFamily="@font/alata"
+                android:text="Save Profile"
+                android:layout_marginBottom="10dp"/>
 
             <Button
                 android:id="@+id/google_button"

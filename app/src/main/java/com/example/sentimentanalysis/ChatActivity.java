@@ -191,6 +191,11 @@ public class ChatActivity extends AppCompatActivity {
             args.putSerializable("ARRAYLIST",(Serializable)hist);
             i.putExtra("BUNDLE",args);
             startActivity(i);
+
+//            Intent c;
+//            c = new Intent(ChatActivity.this, ProfileActivity.class);
+//            c.putExtra("BUNDLE",args);
+//            startActivity(c);
         }
         return 0;
     }
