@@ -1,10 +1,12 @@
 package com.example.sentimentanalysis;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -29,6 +31,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
+
 
         Button ToChat = this.findViewById(R.id.ButtonChat);
         ToChat.setOnClickListener(this::onChatClicked);
@@ -66,6 +74,47 @@ public class MainActivity extends AppCompatActivity {
         ToExercise.setOnClickListener(this::onExerciseClicked);
         LinearLayout ExerciseCard = this.findViewById(R.id.ExerciseSelection);
 
+        LinearLayout MainList = this.findViewById(R.id.MainList);
+
+        final KonfettiView konfettiView = findViewById(R.id.konfettiView);
+
+
+        MainList.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    float x = (int) event.getX();
+                    float y = (int) event.getY()+100;
+                    System.out.println(x);
+                    System.out.println(y);
+                    konfettiView.build()
+                            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                            .setDirection(0.0,359.0)
+                            .setSpeed(1f, 5f)
+                            .setFadeOutEnabled(false)
+                            .addShapes(Shape.Square.INSTANCE, Shape.Circle.INSTANCE)
+                            .addSizes(new Size(8,4f))
+                            .setPosition(x-0,x-0,y-0,y-0)
+                            .streamFor(100,500L);
+                }
+                return true;
+            }
+        });
+
+
+        MainList.setOnClickListener((view) -> {
+
+            konfettiView.build()
+                    .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                    .setDirection(0.0,359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(1000L)
+                    .addShapes(Shape.Square.INSTANCE, Shape.Circle.INSTANCE)
+                    .addSizes(new Size(8,4f))
+                    .setPosition(-50f,konfettiView.getWidth()+50f,-50f,-50f)
+                    .streamFor(300,1000L);
+        });
 
         GoogleSignInOptions gso;
         GoogleSignInClient gsc;

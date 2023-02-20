@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
 
         //connect to ui elems
-        EditProfileButton = this.findViewById(R.id.EditProfileButton);
+//        EditProfileButton = this.findViewById(R.id.EditProfileButton);
 
 
         googleBtn = this.findViewById(R.id.google_button);
