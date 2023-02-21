@@ -192,10 +192,11 @@ public class ChatActivity extends AppCompatActivity {
             i.putExtra("BUNDLE",args);
             startActivity(i);
 
-//            Intent c;
-//            c = new Intent(ChatActivity.this, ProfileActivity.class);
-//            c.putExtra("BUNDLE",args);
-//            startActivity(c);
+//            Intent cintent;
+//            int cargs = 1;
+//            cintent = new Intent(ChatActivity.this, MainActivity.class);
+//            cintent.putExtra("cargs",cargs);
+//            startActivity(cintent);
         }
         return 0;
     }

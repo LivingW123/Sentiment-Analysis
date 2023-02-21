@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,15 +56,26 @@ public class MainActivity extends AppCompatActivity {
         Button ToChat = this.findViewById(R.id.ButtonChat);
         ToChat.setOnClickListener(this::onChatClicked);
         LinearLayout ChatCard = this.findViewById(R.id.ChatSelection);
+        Intent cintent = getIntent();
+        int cargs = cintent.getIntExtra("cargs",0);
+        if (cargs==1){
+            ChatCard.setBackgroundColor(getResources().getColor(R.color.light_green));
+            Intent cloop;
+            int cloopnum = 1;
+            cloop = new Intent(MainActivity.this, ChatActivity.class);
+            cloop.putExtra("cargs",cloopnum);
+            startActivity(cloop);
+        }
+        else{
+            ChatCard.setBackgroundColor(getResources().getColor(R.color.light_pink));
+        }
 
         Button ToDiet = this.findViewById(R.id.ButtonDiet);
         ToDiet.setOnClickListener(this::onDietClicked);
-
-
-        Intent intent = getIntent();
-        int args = intent.getIntExtra("DietColor",0);
+        Intent dintent = getIntent();
+        int dargs = dintent.getIntExtra("DietColor",0);
         LinearLayout DietCard = this.findViewById(R.id.DietSelection);
-        if (args==1){
+        if (dargs==1){
             DietCard.setBackgroundColor(getResources().getColor(R.color.light_green));
         }
         else{
@@ -116,55 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     .streamFor(300,1000L);
         });
 
-        GoogleSignInOptions gso;
-        GoogleSignInClient gsc;
-        FirebaseDatabase database;
-        DatabaseReference mDatabaseUser, mDatabaseEmail;
-        User user;
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
-
-        //if there's already a signed in user in the session fill the activity with its info
-//        if(act != null){
-//            String email = act.getEmail();
-//            database=FirebaseDatabase.getInstance();
-//            mDatabaseUser=database.getReference(getString(R.string.USER_DATA));
-//            mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
-//            mDatabaseEmail.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    HashMap hm = (HashMap) snapshot.getValue();
-//                    String id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
-//                    mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            HashMap hm2 = (HashMap) snapshot.getValue();
-//                            ArrayList<Long> hist = ((ArrayList<Long>)((HashMap) hm2.get(id)).get("sentiment"));
-//                            String s = "Most recent score is : " + hist.get(hist.size() - 1);
-//                            System.out.println(s);
-//                            hist.add( hist.get(hist.size() - 1) + 1);
-//                            mDatabaseUser.child(id).child("sentiment").setValue(hist);
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-//        }
-
-
-//        Button ToMusic = this.findViewById(R.id.ButtonMusic);
-//        ToMusic.setOnClickListener(this::onMusicClicked);
 
         Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         Animation animSlideInLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_left);
@@ -211,23 +175,16 @@ public class MainActivity extends AppCompatActivity {
     private void onChatClicked(View view){
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
-//        overridePendingTransition(R.anim.card_flip_left_in, R.anim.card_flip_right_in);
     }
 
     private void onDietClicked(View view){
         Intent intent = new Intent(this, DietActivity.class);
         startActivity(intent);
-//        overridePendingTransition(R.anim.card_flip_right_in, R.anim.card_flip_left_in);
     }
 
     private void onExerciseClicked(View view){
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
-//        overridePendingTransition(R.anim.card_flip_left_in, R.anim.card_flip_right_in);
     }
 
-//    private void onMusicClicked(View view){
-//        Intent intent = new Intent(this, MusicActivity.class);
-//        startActivity(intent);
-//    }
 }

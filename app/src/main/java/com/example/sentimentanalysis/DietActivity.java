@@ -230,16 +230,16 @@ public class DietActivity extends AppCompatActivity {
     private void onSubClicked(View view){
         Intent i;
         i = new Intent(DietActivity.this, MainActivity.class);
-        int args;
+        int dargs;
 
         if (prop2==0){
-            args = 1;
+            dargs = 1;
         }
         else{
-            args = 0;
+            dargs = 0;
         }
 
-        i.putExtra("DietColor",args);
+        i.putExtra("DietColor",dargs);
         startActivity(i);
     }
 
