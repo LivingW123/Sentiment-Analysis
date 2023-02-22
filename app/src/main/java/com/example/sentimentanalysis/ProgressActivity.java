@@ -89,6 +89,7 @@ public class ProgressActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         ArrayList<Object> hist = (ArrayList<Object>) args.getSerializable("ARRAYLIST");
+        System.out.println(hist);
         LineGraphSeries<DataPoint> series;
 
 

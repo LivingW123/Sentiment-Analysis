@@ -158,6 +158,8 @@ public class ProfileActivity extends AppCompatActivity {
                 mDatabaseUser.child(keyId).setValue(u);
                 //key added to email/id hashmap
                 mDatabaseEmail.child(email.replaceAll("[.#$]" , ",")).setValue(keyId);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
 
 //        EditProfileButton.setOnClickListener(view ->{

@@ -74,6 +74,10 @@ public class ChatActivity extends AppCompatActivity {
     DatabaseReference mDatabaseUser, mDatabaseEmail;
     User user;
 
+    HashMap hm;
+    HashMap hm2;
+    String id;
+
     private Assistant watsonAssistant;
     private Response<SessionResponse> watsonAssistantSession;
 
@@ -98,12 +102,17 @@ public class ChatActivity extends AppCompatActivity {
             mDatabaseEmail.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    HashMap hm = (HashMap) snapshot.getValue();
-                    String id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
+                    hm = (HashMap) snapshot.getValue();
+                    Log.i(TAG, "hm1: " + hm);
+                    id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
+                    Log.i(TAG, "id1: " + id);
                     mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            HashMap hm2 = (HashMap) snapshot.getValue();
+                            Log.i(TAG, "id2: " + id);
+                            System.out.println("New Test: " + id);
+                            hm2 = (HashMap) snapshot.getValue();
+                            Log.i(TAG, "hm22: " + hm2);
                             hist = ((ArrayList<Long>)((HashMap) hm2.get(id)).get("sentiment"));
                         }
                         @Override
@@ -192,11 +201,11 @@ public class ChatActivity extends AppCompatActivity {
             i.putExtra("BUNDLE",args);
             startActivity(i);
 
-//            Intent cintent;
-//            int cargs = 1;
-//            cintent = new Intent(ChatActivity.this, MainActivity.class);
-//            cintent.putExtra("cargs",cargs);
-//            startActivity(cintent);
+            Intent cintent;
+            int cargs = 1;
+            cintent = new Intent(ChatActivity.this, MainActivity.class);
+            cintent.putExtra("cargs",cargs);
+            startActivity(cintent);
         }
         return 0;
     }
@@ -211,6 +220,8 @@ public class ChatActivity extends AppCompatActivity {
         mDatabaseEmail=database.getReference(USER_MAP);
 
         mContext = getApplicationContext();
+//        System.out.println("user "+((HashMap) hm2.get(id)));
+//        System.out.println("hist "+hist);
 
         inputMessage = findViewById(R.id.message);
         btnSend = findViewById(R.id.btn_send);
