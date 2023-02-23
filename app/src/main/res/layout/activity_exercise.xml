@@ -67,13 +67,26 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/calculate_fitness_button"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profilesave"
                 android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/yroundcorner"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="Calculate" />
+                android:paddingHorizontal="15dp"
+                android:fontFamily="@font/alata"
+                android:text="Calculate"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/CalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <androidx.appcompat.widget.Toolbar

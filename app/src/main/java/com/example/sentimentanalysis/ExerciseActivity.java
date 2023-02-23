@@ -5,17 +5,28 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -26,6 +37,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 public class ExerciseActivity extends AppCompatActivity {
@@ -38,8 +50,10 @@ public class ExerciseActivity extends AppCompatActivity {
     TextView WorkoutEquipment;
     TextView WorkoutLength;
     ImageView WorkoutImage;
+    EditText Minutes;
+    int weight;
+    int n;
 
-    int exercise_count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +65,75 @@ public class ExerciseActivity extends AppCompatActivity {
         ExerciseActivity.workout_webscrape dw = new ExerciseActivity.workout_webscrape();
         dw.execute();
 
+        Minutes=findViewById(R.id.editTextWeight);
+
         Spinner spinner = findViewById(R.id.exercise_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.excercise, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnClickListener(this::onSpinnerClicked);
 //        spinner.setOnItemSelectedListener(this);
 //        CheckBox checked = findViewById(R.id.exercise_check);
 //        if(checked.isChecked()){
 //            exercise_count+=1;
-//        }
+//        }\
+
+        GoogleSignInOptions gso;
+        GoogleSignInClient gsc;
+        FirebaseDatabase database;
+        DatabaseReference mDatabaseUser, mDatabaseEmail;
+        User user;
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount act = GoogleSignIn.getLastSignedInAccount(this);
+
+//        Intent i;
+//        i = new Intent(DietActivity.this, MainActivity.class);
+//        int args = 0;
+//        i.putExtra("DietColor",args);
+//        startActivity(i);
+
+        if(act != null){
+            String email = act.getEmail();
+            database=FirebaseDatabase.getInstance();
+            mDatabaseUser=database.getReference(getString(R.string.USER_DATA));
+            mDatabaseEmail=database.getReference(getString(R.string.USER_MAP));
+            mDatabaseEmail.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    HashMap hm = (HashMap) snapshot.getValue();
+                    String id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
+                    mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap hm3 = (HashMap) snapshot.getValue();
+                            weight = ((Long)((HashMap) hm3.get(id)).get("weight")).intValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
+
+
+    }
+
+    private void onSpinnerClicked(View view){
+        //n=...
+        double MET=n*3.5*weight*0.00226796185;
+        int RMET =(int)Math.round(MET);
     }
 
     private class workout_webscrape extends AsyncTask<Void, Void, Void> {

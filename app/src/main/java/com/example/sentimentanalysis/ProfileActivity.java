@@ -59,7 +59,6 @@ public class ProfileActivity extends AppCompatActivity {
     Button googleBtn;
     Button signOutBtn;
     Button profileSaveBtn;
-    AppCompatButton EditProfileButton;
     EditText emailEditText;
     EditText nameEditText;
     EditText ageEditText;

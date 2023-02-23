@@ -7,16 +7,20 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string-array name="excercise">
-        <item>Yoga</item>
-        <item>Dance</item>
-        <item>Cycling</item>
-        <item>Jogging</item>
-        <item>Strength Training</item>
-        <item>Swim</item>
-        <item>Tennis</item>
-        <item>Basketball</item>
-        <item>Soccer</item>
-        <item>Golf</item>
+        <item>Housework (cleaning, sweeping)</item>
+        <item>Weight training (lighter weights)</item>
+        <item>Golf (walking, pulling clubs)</item>
+        <item>Brisk walking (3.5–4 mph)</item>
+        <item>Weight training (heavier weights)</item>
+        <item>Yard work (mowing, moderate effort)</item>
+        <item>Swimming laps (leisurely pace)</item>
+        <item>Walking at very brisk pace (4.5 mph)</item>
+        <item>Bicycling 12–14 mph (flat terrain)</item>
+        <item>Circuit training (minimal rest)</item>
+        <item>Singles tennis</item>
+        <item>Shoveling, digging ditches</item>
+        <item>Competitive soccer</item>
+        <item>Running (7 mph)</item>
     </string-array>
 
     <string name="USER_DATA">user</string>
