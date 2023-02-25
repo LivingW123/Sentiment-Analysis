@@ -315,6 +315,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void onProgressClicked(View view){
         Intent intent = new Intent(this, ProgressActivity.class);
+        intent.putExtra("currenthist",currentHist);
         startActivity(intent);
     }
 

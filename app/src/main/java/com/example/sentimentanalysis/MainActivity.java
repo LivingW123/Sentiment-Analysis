@@ -51,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
+        // set
+        ((MyApplication) this.getApplication()).setSomeVariable("foo");
 
+        // get
+        String s = ((MyApplication) this.getApplication()).getSomeVariable();
+        System.out.println(s);
 
         Button ToChat = this.findViewById(R.id.ButtonChat);
         ToChat.setOnClickListener(this::onChatClicked);
@@ -60,11 +65,6 @@ public class MainActivity extends AppCompatActivity {
         int cargs = cintent.getIntExtra("cargs",0);
         if (cargs==1){
             ChatCard.setBackgroundColor(getResources().getColor(R.color.light_green));
-            Intent cloop;
-            int cloopnum = 1;
-            cloop = new Intent(MainActivity.this, ChatActivity.class);
-            cloop.putExtra("cargs",cloopnum);
-            startActivity(cloop);
         }
         else{
             ChatCard.setBackgroundColor(getResources().getColor(R.color.light_pink));

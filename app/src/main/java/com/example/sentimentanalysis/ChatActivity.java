@@ -103,9 +103,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     hm = (HashMap) snapshot.getValue();
-                    Log.i(TAG, "hm1: " + hm);
                     id = (String)(hm.get(email.replaceAll("[.#$]" , ",")));
-                    Log.i(TAG, "id1: " + id);
                     mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -175,19 +173,19 @@ public class ChatActivity extends AppCompatActivity {
 
     private int score(String msg){
         if (msg.contains("Fantastic job!")){
-            return 2;
+            return 3;
         }
         else if (msg.contains("That's great!")){
-            return 1;
+            return 2;
         }
         else if (msg.contains("That's alright.")){
-            return 0;
+            return 1;
         }
         else if (msg.contains("Oh no :(")){
-            return -1;
+            return 0;
         }
         else if (msg.contains("I'm so sorry to hear that :(")){
-            return -2;
+            return -1;
         }
         else if (msg.contains("Thanks for the evaluation! For more information")){
             System.out.println("done");
@@ -196,16 +194,13 @@ public class ChatActivity extends AppCompatActivity {
 
             Intent i;
             i = new Intent(ChatActivity.this, ProgressActivity.class);
-            Bundle args = new Bundle();
-            args.putSerializable("ARRAYLIST",(Serializable)hist);
-            i.putExtra("BUNDLE",args);
+            i.putExtra("currenthist",hist);
             startActivity(i);
 
-            Intent cintent;
-            int cargs = 1;
-            cintent = new Intent(ChatActivity.this, MainActivity.class);
-            cintent.putExtra("cargs",cargs);
-            startActivity(cintent);
+//            Intent cintent;
+//            int cargs = 1;
+//            cintent = new Intent(ChatActivity.this, MainActivity.class);
+//            cintent.putExtra("cargs",cargs);
         }
         return 0;
     }

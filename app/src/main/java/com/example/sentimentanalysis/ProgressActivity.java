@@ -87,8 +87,7 @@ public class ProgressActivity extends AppCompatActivity {
         // on below line we are adding data to our graph view.
 
         Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        ArrayList<Object> hist = (ArrayList<Object>) args.getSerializable("ARRAYLIST");
+        ArrayList<Long> hist=(ArrayList<Long>)intent.getSerializableExtra("currenthist");
         System.out.println(hist);
         LineGraphSeries<DataPoint> series;
 

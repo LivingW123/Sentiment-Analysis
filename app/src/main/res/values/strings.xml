@@ -23,6 +23,23 @@
         <item>Running (7 mph)</item>
     </string-array>
 
+    <string-array name="excercise_val">
+        <item>3.5</item>
+        <item>3.5</item>
+        <item>4.3</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6.3</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8.5</item>
+        <item>10</item>
+        <item>11.5</item>
+    </string-array>
+
     <string name="USER_DATA">user</string>
     <string name="USER_MAP">emailToUid</string>
     <string name="hello_first_fragment">Hello first fragment</string>

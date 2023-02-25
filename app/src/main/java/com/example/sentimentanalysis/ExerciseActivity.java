@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -50,9 +51,9 @@ public class ExerciseActivity extends AppCompatActivity {
     TextView WorkoutEquipment;
     TextView WorkoutLength;
     ImageView WorkoutImage;
-    EditText Minutes;
     int weight;
     int n;
+    AppCompatTextView cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,31 @@ public class ExerciseActivity extends AppCompatActivity {
         ExerciseActivity.workout_webscrape dw = new ExerciseActivity.workout_webscrape();
         dw.execute();
 
-        Minutes=findViewById(R.id.editTextWeight);
+        EditText Minutes=(EditText) findViewById(R.id.duration_minutes);
+        cal=findViewById(R.id.cal);
 
-        Spinner spinner = findViewById(R.id.exercise_type_spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.exercise_type_spinner);
+//        String size = spinner.getSelectedItem().toString();
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.excercise, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnClickListener(this::onSpinnerClicked);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Double time = Double.valueOf(Minutes.getText().toString());
+                int spinner_pos = spinner.getSelectedItemPosition();
+                String[] size_values = getResources().getStringArray(R.array.excercise_val);
+                double size = Double.valueOf(size_values[spinner_pos]);
+                double MET=time*size*3.5*weight*0.00226796185;
+                int RMET =(int)Math.round(MET);
+                System.out.println(RMET);
+                cal.setText("Calories: "+String.valueOf(RMET));
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
 //        spinner.setOnItemSelectedListener(this);
 //        CheckBox checked = findViewById(R.id.exercise_check);
 //        if(checked.isChecked()){
@@ -130,11 +149,13 @@ public class ExerciseActivity extends AppCompatActivity {
 
     }
 
-    private void onSpinnerClicked(View view){
-        //n=...
-        double MET=n*3.5*weight*0.00226796185;
-        int RMET =(int)Math.round(MET);
-    }
+
+
+//    private void onSpinnerClicked(View view){
+//        //n=...
+//        double MET=n*3.5*weight*0.00226796185;
+//        int RMET =(int)Math.round(MET);
+//    }
 
     private class workout_webscrape extends AsyncTask<Void, Void, Void> {
 
